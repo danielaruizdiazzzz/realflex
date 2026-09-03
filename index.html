@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RealFlex Mockup</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f4f7fa;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172033;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: 0;
+}
+
+button,
+.blocks-chip,
+.files-button,
+.search-nav-button,
+.switch {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 64px;
+    background: #ffffff;
+    border-bottom: 1px solid #e3e7ec;
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1130px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+}
+
+.logo {
+    margin-right: 42px;
+    flex-shrink: 0;
+    font-size: 25px;
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: -0.07em;
+    line-height: 1;
+    color: #000000;
+    user-select: none;
+}
+
+.logo span {
+    font-style: normal;
+}
+
+.blocks-wrapper {
+    position: relative;
+    margin-right: auto;
+}
+
+.blocks-chip {
+    height: 34px;
+    padding: 0 13px;
+    border-radius: 999px;
+    border: 1px solid #abd5ff;
+    background: #eaf5ff;
+    color: #0876dd;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow:
+        0 2px 5px rgba(18, 84, 145, 0.08),
+        0 0 0 1px rgba(0, 118, 221, 0.02);
+    transition: 0.15s ease;
+}
+
+.blocks-chip:hover {
+    background: #e2f1ff;
+    border-color: #8bc4fa;
+}
+
+.blocks-chip svg {
+    width: 18px;
+    height: 18px;
+}
+
+.blocks-dropdown {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    width: 310px;
+    display: none;
+    background: #ffffff;
+    border: 1px solid #dfe5ec;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(25, 42, 63, 0.15);
+    overflow: hidden;
+    z-index: 150;
+}
+
+.blocks-dropdown.open {
+    display: block;
+}
+
+.blocks-dropdown-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.blocks-dropdown-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #243247;
+}
+
+.blocks-dropdown-subtitle {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #8a96a5;
+}
+
+.summary-category {
+    border-bottom: 1px solid #eef1f4;
+}
+
+.summary-category:last-child {
+    border-bottom: 0;
+}
+
+.summary-category-button {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    cursor: pointer;
+    color: #344255;
+    transition: background 0.15s ease;
+}
+
+.summary-category-button:hover {
+    background: #f7faff;
+}
+
+.summary-chevron {
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid #758294;
+    border-bottom: 1.5px solid #758294;
+    transform: rotate(-45deg);
+    margin-right: 10px;
+    transition: transform 0.15s ease;
+}
+
+.summary-category.expanded .summary-chevron {
+    transform: rotate(45deg);
+}
+
+.summary-name {
+    flex: 1;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.summary-count {
+    min-width: 24px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: #edf6ff;
+    color: #0876dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.summary-instances {
+    display: none;
+    padding: 2px 8px 8px 31px;
+    background: #fafbfd;
+}
+
+.summary-category.expanded .summary-instances {
+    display: block;
+}
+
+.summary-instance {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #617084;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.summary-instance:hover {
+    background: #edf6ff;
+    color: #0876dd;
+}
+
+.summary-instance-number {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: #eef1f5;
+    color: #687689;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pagination {
+    height: 34px;
+    margin-right: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 9px;
+    border-radius: 999px;
+    border: 1px solid #e1e6eb;
+    background: #f8fafc;
+    color: #748093;
+    font-size: 12px;
+}
+
+.pagination-arrow {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    color: #8894a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.pagination-arrow svg {
+    width: 14px;
+    height: 14px;
+}
+
+.pagination-text {
+    margin: 0 6px;
+    white-space: nowrap;
+}
+
+.page-number {
+    min-width: 28px;
+    height: 28px;
+    margin: 0 3px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: #0876dd;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.search-box {
+    width: 260px;
+    height: 36px;
+    margin-right: 12px;
+    padding: 0 8px 0 11px;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid #dfe4ea;
+    background: #f9fbfc;
+    transition: 0.15s ease;
+}
+
+.search-box:focus-within {
+    border-color: #9bcaf6;
+    box-shadow: 0 0 0 2px rgba(0, 118, 221, 0.08);
+}
+
+.search-icon {
+    margin-right: 8px;
+    flex-shrink: 0;
+    color: #8793a2;
+    display: flex;
+}
+
+.search-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.search-box input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 12px;
+    color: #324052;
+}
+
+.search-box input::placeholder {
+    color: #738093;
+}
+
+.search-counter {
+    margin: 0 7px 0 4px;
+    color: #7f8b9a;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.search-controls {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.search-nav-button {
+    width: 22px;
+    height: 24px;
+    border-radius: 6px;
+    background: transparent;
+    color: #7d8997;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.search-nav-button:hover {
+    background: #eef3f8;
+}
+
+.search-nav-button svg {
+    width: 12px;
+    height: 12px;
+}
+
+.files-button {
+    height: 36px;
+    padding: 0 13px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 12px;
+    border: 1px solid #dfe4ea;
+    background: #f9fbfc;
+    color: #475466;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(18, 38, 63, 0.03);
+    transition: 0.15s ease;
+}
+
+.files-button:hover {
+    background: #f3f7fb;
+    border-color: #cfd7e0;
+}
+
+.files-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.files-count {
+    min-width: 22px;
+    height: 22px;
+    margin-left: 2px;
+    padding: 0 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #eaf3ff;
+    color: #1473df;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.page {
+    width: 100%;
+    max-width: 1130px;
+    margin: 0 auto;
+    padding: 24px 0 130px;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #dfe4e9;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(22, 34, 51, 0.05);
+}
+
+.basic-card {
+    padding: 22px 20px 20px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #526175;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px 16px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px 16px;
+}
+
+.grid-operations {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.field {
+    min-width: 0;
+}
+
+.field-label {
+    margin-bottom: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #526175;
+}
+
+.field-value {
+    height: 38px;
+    padding: 0 13px;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    border: 1px solid #dfe5ec;
+    background: #f7f9fb;
+    color: #172033;
+    font-size: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.placeholder {
+    color: #8d99a8;
+}
+
+.add-block {
+    width: 100%;
+    height: 42px;
+    border-radius: 11px;
+    border: 1px dashed #dde4ec;
+    background: transparent;
+    color: #5f6d7e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.add-block svg {
+    width: 16px;
+    height: 16px;
+}
+
+.add-block:hover {
+    background: #e3f1ff;
+    border-color: #68b5ff;
+    color: #0876dd;
+}
+
+.block-card {
+    overflow: hidden;
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    scroll-margin-top: 86px;
+}
+
+.block-card.search-highlight {
+    border-color: #2096f3;
+    box-shadow:
+        0 0 0 2px rgba(32, 150, 243, 0.2),
+        0 3px 8px rgba(22, 34, 51, 0.08);
+}
+
+.block-header {
+    min-height: 57px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    background: #f6f8fb;
+    border-bottom: 1px solid #e2e7ed;
+}
+
+.drag-icon {
+    width: 24px;
+    margin-right: 4px;
+    background: transparent;
+    color: #9aa6b4;
+    cursor: grab;
+    font-size: 17px;
+    letter-spacing: -4px;
+}
+
+.expand-button {
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.chevron-icon {
+    width: 8px;
+    height: 8px;
+    border-right: 1.7px solid #566476;
+    border-bottom: 1.7px solid #566476;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+    margin-top: -3px;
+}
+
+.block-header.collapsed .chevron-icon {
+    transform: rotate(-45deg);
+    margin-top: 0;
+}
+
+.block-title-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.block-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #172033;
+}
+
+.block-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.smart-code-control {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.smart-label {
+    font-size: 11px;
+    color: #647286;
+    font-weight: 500;
+}
+
+.switch {
+    position: relative;
+    width: 34px;
+    height: 19px;
+    border-radius: 999px;
+    background: #cbd3dc;
+    cursor: pointer;
+    transition: background 0.18s ease;
+    flex-shrink: 0;
+}
+
+.switch::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(25, 37, 52, 0.25);
+    transition: transform 0.18s ease;
+}
+
+.switch.active {
+    background: #0876dd;
+}
+
+.switch.active::after {
+    transform: translateX(15px);
+}
+
+.delete-block {
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: transparent;
+    color: #8c98a7;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.delete-block:hover {
+    background: #fff0f0;
+    color: #e14a4a;
+}
+
+.delete-block svg {
+    width: 15px;
+    height: 15px;
+}
+
+.block-content {
+    padding: 16px 17px 17px;
+}
+
+.block-content.hidden {
+    display: none;
+}
+
+.smart-extension {
+    display: none;
+    margin-top: 19px;
+    padding: 15px;
+    border: 1px solid #cde3fb;
+    border-radius: 12px;
+    background: #f5faff;
+    animation: smartReveal 0.2s ease;
+}
+
+.smart-extension.visible {
+    display: block;
+}
+
+@keyframes smartReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.smart-extension-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 13px;
+}
+
+.smart-extension-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: #e2f1ff;
+    color: #0876dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.smart-extension-icon svg {
+    width: 13px;
+    height: 13px;
+}
+
+.smart-extension-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #347dbb;
+}
+
+.smart-extension-subtitle {
+    margin-left: auto;
+    font-size: 10px;
+    color: #7ba3c5;
+}
+
+.smart-field .field-value {
+    background: #ffffff;
+    border-color: #cbdff3;
+}
+
+.operations-box {
+    margin-top: 19px;
+    padding: 13px;
+    border: 1px solid #e1e6eb;
+    border-radius: 12px;
+    background: #fbfcfd;
+}
+
+.operations-header {
+    margin-bottom: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.operations-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #526175;
+}
+
+.operation-button {
+    background: transparent;
+    color: #1473df;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.operation-button svg {
+    width: 14px;
+    height: 14px;
+}
+
+.operation-row {
+    padding: 5px 7px 7px;
+    border-radius: 11px;
+    background: #ffffff;
+}
+
+.save-bar {
+    position: fixed;
+    right: 20px;
+    bottom: 12px;
+    z-index: 50;
+    height: 53px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #e0e5ea;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 3px 18px rgba(22, 34, 51, 0.12);
+}
+
+.unsaved {
+    margin-right: 2px;
+    font-size: 12px;
+    color: #8994a3;
+}
+
+.cancel-button,
+.save-button {
+    height: 36px;
+    padding: 0 15px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-button {
+    border: 1px solid #d9dfe6;
+    background: #f7f9fb;
+    color: #364254;
+}
+
+.save-button {
+    padding: 0 16px;
+    background: #0876dd;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 89, 180, 0.15);
+}
+
+.empty-search {
+    position: fixed;
+    top: 78px;
+    left: 50%;
+    z-index: 200;
+    transform: translateX(-50%);
+    padding: 9px 13px;
+    border-radius: 9px;
+    background: #253247;
+    color: white;
+    font-size: 11px;
+    box-shadow: 0 4px 12px rgba(22, 34, 51, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+.empty-search.visible {
+    opacity: 1;
+}
+
+/* MODAL ARQUIVOS */
+
+.files-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(20, 24, 30, 0.76);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.18s ease,
+        visibility 0.18s ease;
+}
+
+.files-modal-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.files-modal {
+    width: 100%;
+    max-width: 705px;
+    padding: 25px 26px 28px;
+    border: 1px solid #d9e0e7;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 22px 55px rgba(6, 16, 28, 0.24);
+    transform: translateY(8px) scale(0.99);
+    transition: transform 0.18s ease;
+}
+
+.files-modal-backdrop.open .files-modal {
+    transform: translateY(0) scale(1);
+}
+
+.files-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.files-modal-title {
+    margin: 0;
+    color: #1c2838;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.files-modal-close {
+    width: 30px;
+    height: 30px;
+    margin-top: -4px;
+    margin-right: -5px;
+    border-radius: 7px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5f6b7a;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.files-modal-close:hover {
+    background: #f0f3f6;
+    color: #1f2c3d;
+}
+
+.files-modal-close svg {
+    width: 17px;
+    height: 17px;
+}
+
+.files-modal-description {
+    margin: 8px 0 20px;
+    color: #657286;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+.upload-zone {
+    min-height: 135px;
+    padding: 22px 25px;
+    border: 2px dashed #dce3ea;
+    border-radius: 14px;
+    background: #fafbfd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition:
+        border-color 0.16s ease,
+        background 0.16s ease;
+}
+
+.upload-zone.dragging {
+    border-color: #72b7f3;
+    background: #f1f8ff;
+}
+
+.upload-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    color: #667486;
+}
+
+.upload-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.upload-main-text {
+    color: #6b7788;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.upload-select {
+    padding: 0;
+    background: transparent;
+    color: #0876dd;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.upload-select:hover {
+    text-decoration: underline;
+}
+
+.upload-help {
+    margin-top: 10px;
+    color: #8b96a6;
+    font-size: 13px;
+}
+
+.file-input {
+    display: none;
+}
+
+.files-empty {
+    padding: 39px 10px 16px;
+    color: #657286;
+    font-size: 15px;
+    text-align: center;
+}
+
+.files-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.file-item {
+    min-height: 48px;
+    padding: 8px 10px 8px 12px;
+    border: 1px solid #e1e6ec;
+    border-radius: 10px;
+    background: #fbfcfd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-item-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: #edf6ff;
+    color: #0876dd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.file-item-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.file-item-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.file-item-name {
+    overflow: hidden;
+    color: #344255;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.file-item-size {
+    margin-top: 2px;
+    color: #8a96a5;
+    font-size: 10px;
+}
+
+.file-remove {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: transparent;
+    color: #8793a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.file-remove:hover {
+    color: #d84b4b;
+    background: #fff1f1;
+}
+
+.file-remove svg {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 1180px) {
+    .navbar-inner,
+    .page {
+        max-width: calc(100% - 32px);
+    }
+
+    .navbar-inner {
+        padding: 0;
+    }
+
+    .logo {
+        margin-right: 24px;
+    }
+
+    .pagination {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 960px) {
+    .navbar {
+        height: auto;
+    }
+
+    .navbar-inner {
+        padding: 12px 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo {
+        width: 100%;
+    }
+
+    .blocks-wrapper,
+    .pagination,
+    .search-box,
+    .files-button {
+        margin: 0;
+    }
+
+    .search-box {
+        flex: 1;
+        width: auto;
+    }
+
+    .grid-4,
+    .grid-3,
+    .grid-operations {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .grid-4,
+    .grid-3,
+    .grid-operations {
+        grid-template-columns: 1fr;
+    }
+
+    .smart-label {
+        display: none;
+    }
+
+    .save-bar {
+        left: 12px;
+        right: 12px;
+        justify-content: flex-end;
+    }
+
+    .unsaved {
+        display: none;
+    }
+
+    .blocks-dropdown {
+        width: 280px;
+    }
+
+    .files-modal-backdrop {
+        padding: 16px;
+    }
+
+    .files-modal {
+        padding: 21px 18px 23px;
+    }
+
+    .files-modal-title {
+        font-size: 18px;
+    }
+
+    .files-modal-description {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="navbar-inner">
+
+        <div class="logo">
+            REAL<span>FLEX</span>
+        </div>
+
+        <div class="blocks-wrapper">
+
+            <button
+                class="blocks-chip"
+                id="blocksChip"
+                onclick="toggleBlocksSummary(event)"
+            >
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3L21 7.5L12 12L3 7.5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M3 12L12 16.5L21 12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M3 16.5L12 21L21 16.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+
+                <span id="blocksCount">
+                    6 blocos
+                </span>
+            </button>
+
+            <div
+                class="blocks-dropdown"
+                id="blocksDropdown"
+            >
+                <div class="blocks-dropdown-header">
+                    <div class="blocks-dropdown-title">
+                        Resumo dos blocos
+                    </div>
+
+                    <div
+                        class="blocks-dropdown-subtitle"
+                        id="blocksDropdownSubtitle"
+                    >
+                        6 blocos no total
+                    </div>
+                </div>
+
+                <div id="blocksSummary"></div>
+            </div>
+
+        </div>
+
+        <div class="pagination">
+
+            <button class="pagination-arrow">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+            <span class="pagination-text">
+                1–6 nesta página
+            </span>
+
+            <span class="page-number">
+                1
+            </span>
+
+            <button class="pagination-arrow">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+
+        </div>
+
+        <div class="search-box">
+
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M16 16L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+            </span>
+
+            <input
+                type="text"
+                id="blockSearch"
+                placeholder="Buscar bloco"
+                oninput="searchBlocks()"
+                onkeydown="handleSearchKey(event)"
+            >
+
+            <span
+                class="search-counter"
+                id="searchCounter"
+            ></span>
+
+            <div class="search-controls">
+
+                <button
+                    class="search-nav-button"
+                    type="button"
+                    onclick="previousSearchResult()"
+                    title="Resultado anterior"
+                >
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 14L12 8L18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <button
+                    class="search-nav-button"
+                    type="button"
+                    onclick="nextSearchResult()"
+                    title="Próximo resultado"
+                >
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+
+        <button
+            class="files-button"
+            onclick="openFilesModal()"
+        >
+
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8.5 12.5L14.8 6.2C16.3 4.7 18.7 4.7 20.2 6.2C21.7 7.7 21.7 10.1 20.2 11.6L11.3 20.5C8.9 22.9 5 22.9 2.6 20.5C0.2 18.1 0.2 14.2 2.6 11.8L11.2 3.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M6.4 15.1L15.1 6.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+
+            Arquivos
+
+            <span
+                class="files-count"
+                id="filesCount"
+            >
+                0
+            </span>
+
+        </button>
+
+    </div>
+</header>
+
+<main class="page">
+
+    <div class="stack" id="blocksContainer">
+
+        <section class="card basic-card">
+
+            <div class="section-title">
+                DADOS BÁSICOS CADASTRAIS
+            </div>
+
+            <div class="grid-4">
+
+                <div class="field">
+                    <div class="field-label">TÍTULO</div>
+                    <div class="field-value">
+                        PLANO DO CONTROLE DE PROCESO
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">P.C N°</div>
+                    <div class="field-value">
+                        <span class="placeholder">—</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">REVISÃO</div>
+                    <div class="field-value">
+                        <span class="placeholder">—</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">DATA</div>
+                    <div class="field-value">
+                        <span class="placeholder">—</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">VERIFICAÇÃO</div>
+                    <div class="field-value">
+                        <span class="placeholder">—</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">APROVAÇÃO</div>
+                    <div class="field-value">
+                        <span class="placeholder">—</span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        CÓDIGO DO PRODUTO
+                    </div>
+                    <div class="field-value">
+                        100%Blocos
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        NOME DO PRODUTO
+                    </div>
+                    <div class="field-value">
+                        Teste de TODOS os blocos
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- BITOLA 1 -->
+        <section
+            class="card block-card"
+            id="block-bitola-1"
+            data-category="Bitola"
+            data-title="Bitola"
+        >
+
+            <div class="block-header" id="bitola1-header">
+
+                <button class="drag-icon">
+                    ⠿
+                </button>
+
+                <button
+                    class="expand-button"
+                    onclick="toggleBlock('bitola1')"
+                >
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button
+                    class="block-title-button"
+                    onclick="toggleBlock('bitola1')"
+                >
+                    <span class="block-title">
+                        BITOLA
+                    </span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">
+                            Código inteligente
+                        </span>
+
+                        <button
+                            class="switch"
+                            id="bitola1-switch"
+                            onclick="toggleSmartCode('bitola1')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-bitola-1')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                            <path d="M9 3H15L16 5H8L9 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                            <path d="M7 7L8 21H16L17 7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                            <path d="M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content" id="bitola1-content">
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">NUMERO LONAS (UN)</div>
+                        <div class="field-value">1</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">NUMERO DE PEÇAS (UN)</div>
+                        <div class="field-value">6</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
+                        <div class="field-value">80,00</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">COMPRIMENTO DA PEÇA (M)</div>
+                        <div class="field-value">20,00</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">DIAMETRO INTERNO MINIMO (MM)</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">PAREDE (MM)</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">PESO CALCULADO (KG/M)</div>
+                        <div class="field-value"><span class="placeholder">Calculado</span></div>
+                    </div>
+
+                </div>
+
+                <div class="smart-extension" id="bitola1-smart">
+
+                    <div class="smart-extension-header">
+
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">
+                            Código inteligente
+                        </span>
+
+                        <span class="smart-extension-subtitle">
+                            Configuração adicional
+                        </span>
+
+                    </div>
+
+                    <div class="grid-4">
+
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="operations-box">
+
+                    <div class="operations-header">
+                        <span class="operations-title">OPERAÇÕES</span>
+
+                        <button class="operation-button">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                            Operação
+                        </button>
+                    </div>
+
+                    <div class="operation-row">
+
+                        <div class="grid-operations">
+
+                            <div class="field">
+                                <div class="field-label">OPERAÇÃO</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">TIPO DE OPERAÇÃO</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">QTD_VAR</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">TEMPO EM MINUTOS</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- DESENGRAXAMENTO 1 -->
+        <section
+            class="card block-card"
+            id="block-desengraxamento-1"
+            data-category="Desengraxamento"
+            data-title="Desengraxamento"
+        >
+
+            <div class="block-header" id="desengraxamento1-header">
+
+                <button class="drag-icon">⠿</button>
+
+                <button
+                    class="expand-button"
+                    onclick="toggleBlock('desengraxamento1')"
+                >
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button
+                    class="block-title-button"
+                    onclick="toggleBlock('desengraxamento1')"
+                >
+                    <span class="block-title">Desengraxamento</span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">Código inteligente</span>
+
+                        <button
+                            class="switch"
+                            id="desengraxamento1-switch"
+                            onclick="toggleSmartCode('desengraxamento1')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-desengraxamento-1')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content" id="desengraxamento1-content">
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">CÓDIGO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">CONCENTRAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">TEMPERATURA</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                </div>
+
+                <div class="smart-extension" id="desengraxamento1-smart">
+
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- BITOLA 2 -->
+        <section
+            class="card block-card"
+            id="block-bitola-2"
+            data-category="Bitola"
+            data-title="Bitola"
+        >
+
+            <div class="block-header collapsed" id="bitola2-header">
+
+                <button class="drag-icon">⠿</button>
+
+                <button class="expand-button" onclick="toggleBlock('bitola2')">
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button class="block-title-button" onclick="toggleBlock('bitola2')">
+                    <span class="block-title">BITOLA</span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">Código inteligente</span>
+                        <button
+                            class="switch"
+                            id="bitola2-switch"
+                            onclick="toggleSmartCode('bitola2')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-bitola-2')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content hidden" id="bitola2-content">
+
+                <div class="grid-3">
+                    <div class="field">
+                        <div class="field-label">NUMERO LONAS (UN)</div>
+                        <div class="field-value">1</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">NUMERO DE PEÇAS (UN)</div>
+                        <div class="field-value">6</div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
+                        <div class="field-value">80,00</div>
+                    </div>
+                </div>
+
+                <div class="smart-extension" id="bitola2-smart">
+
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- ACESSORIOS -->
+        <section
+            class="card block-card"
+            id="block-acessorios-1"
+            data-category="Acessórios"
+            data-title="Acessórios"
+        >
+
+            <div class="block-header collapsed" id="acessorios1-header">
+
+                <button class="drag-icon">⠿</button>
+
+                <button class="expand-button" onclick="toggleBlock('acessorios1')">
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button class="block-title-button" onclick="toggleBlock('acessorios1')">
+                    <span class="block-title">Acessórios</span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">Código inteligente</span>
+                        <button
+                            class="switch"
+                            id="acessorios1-switch"
+                            onclick="toggleSmartCode('acessorios1')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-acessorios-1')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content hidden" id="acessorios1-content">
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">CÓDIGO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">TIPO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">QUANTIDADE</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                </div>
+
+                <div class="smart-extension" id="acessorios1-smart">
+
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- DESENGRAXAMENTO 2 -->
+        <section
+            class="card block-card"
+            id="block-desengraxamento-2"
+            data-category="Desengraxamento"
+            data-title="Desengraxamento"
+        >
+
+            <div class="block-header collapsed" id="desengraxamento2-header">
+
+                <button class="drag-icon">⠿</button>
+
+                <button class="expand-button" onclick="toggleBlock('desengraxamento2')">
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button class="block-title-button" onclick="toggleBlock('desengraxamento2')">
+                    <span class="block-title">Desengraxamento</span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">Código inteligente</span>
+                        <button
+                            class="switch"
+                            id="desengraxamento2-switch"
+                            onclick="toggleSmartCode('desengraxamento2')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-desengraxamento-2')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content hidden" id="desengraxamento2-content">
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">CÓDIGO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">CONCENTRAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">TEMPERATURA</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                </div>
+
+                <div class="smart-extension" id="desengraxamento2-smart">
+
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+        <!-- EMBALAGEM -->
+        <section
+            class="card block-card"
+            id="block-embalagem-1"
+            data-category="Embalagem"
+            data-title="Embalagem"
+        >
+
+            <div class="block-header collapsed" id="embalagem1-header">
+
+                <button class="drag-icon">⠿</button>
+
+                <button class="expand-button" onclick="toggleBlock('embalagem1')">
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button class="block-title-button" onclick="toggleBlock('embalagem1')">
+                    <span class="block-title">Embalagem</span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+                        <span class="smart-label">Código inteligente</span>
+
+                        <button
+                            class="switch"
+                            id="embalagem1-switch"
+                            onclick="toggleSmartCode('embalagem1')"
+                        ></button>
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-embalagem-1')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="block-content hidden" id="embalagem1-content">
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">TIPO DE EMBALAGEM</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">QUANTIDADE</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                </div>
+
+                <div class="smart-extension" id="embalagem1-smart">
+
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button class="add-block">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            Adicionar bloco aqui
+        </button>
+
+    </div>
+
+</main>
+
+<div class="save-bar">
+
+    <span class="unsaved">
+        Alterações não salvas
+    </span>
+
+    <button class="cancel-button">
+        <span>⊘</span>
+        Cancelar
+    </button>
+
+    <button class="save-button">
+        <span>▣</span>
+        Modificar
+    </button>
+
+</div>
+
+<div
+    class="empty-search"
+    id="emptySearchMessage"
+>
+    Nenhum bloco encontrado
+</div>
+
+<!-- MODAL ARQUIVOS -->
+
+<div
+    class="files-modal-backdrop"
+    id="filesModalBackdrop"
+    onclick="handleFilesBackdropClick(event)"
+>
+
+    <div
+        class="files-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filesModalTitle"
+    >
+
+        <div class="files-modal-header">
+
+            <div>
+                <h2
+                    class="files-modal-title"
+                    id="filesModalTitle"
+                >
+                    Arquivos
+                </h2>
+            </div>
+
+            <button
+                class="files-modal-close"
+                onclick="closeFilesModal()"
+                aria-label="Fechar"
+            >
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M6 6L18 18M18 6L6 18"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+
+        </div>
+
+        <p class="files-modal-description">
+            Anexe documentos, desenhos técnicos ou imagens relacionados à ficha.
+        </p>
+
+        <div
+            class="upload-zone"
+            id="uploadZone"
+            ondragover="handleDragOver(event)"
+            ondragleave="handleDragLeave(event)"
+            ondrop="handleFileDrop(event)"
+        >
+
+            <div class="upload-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M12 16V4M12 4L7.5 8.5M12 4L16.5 8.5"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    <path
+                        d="M5 14V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V14"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </div>
+
+            <div class="upload-main-text">
+                Arraste arquivos aqui ou
+
+                <button
+                    class="upload-select"
+                    onclick="document.getElementById('fileInput').click()"
+                >
+                    selecione do computador
+                </button>
+            </div>
+
+            <div class="upload-help">
+                PDF, imagens ou planilhas
+            </div>
+
+            <input
+                type="file"
+                id="fileInput"
+                class="file-input"
+                multiple
+                accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.xls,.xlsx,.csv"
+                onchange="handleFileSelection(event)"
+            >
+
+        </div>
+
+        <div
+            class="files-empty"
+            id="filesEmpty"
+        >
+            Nenhum arquivo anexado ainda.
+        </div>
+
+        <div
+            class="files-list"
+            id="filesList"
+        ></div>
+
+    </div>
+
+</div>
+
+<script>
+let searchResults = [];
+let currentSearchIndex = -1;
+let attachedFiles = [];
+
+function toggleBlock(blockName) {
+    const content = document.getElementById(blockName + "-content");
+    const header = document.getElementById(blockName + "-header");
+
+    if (!content || !header) {
+        return;
+    }
+
+    const isHidden = content.classList.contains("hidden");
+
+    if (isHidden) {
+        content.classList.remove("hidden");
+        header.classList.remove("collapsed");
+    } else {
+        content.classList.add("hidden");
+        header.classList.add("collapsed");
+    }
+}
+
+function toggleSmartCode(blockName) {
+    const switchElement = document.getElementById(blockName + "-switch");
+    const extension = document.getElementById(blockName + "-smart");
+    const content = document.getElementById(blockName + "-content");
+    const header = document.getElementById(blockName + "-header");
+
+    if (!switchElement || !extension) {
+        return;
+    }
+
+    const willActivate =
+        !switchElement.classList.contains("active");
+
+    switchElement.classList.toggle(
+        "active",
+        willActivate
+    );
+
+    extension.classList.toggle(
+        "visible",
+        willActivate
+    );
+
+    if (
+        willActivate &&
+        content &&
+        content.classList.contains("hidden")
+    ) {
+        content.classList.remove("hidden");
+
+        if (header) {
+            header.classList.remove("collapsed");
+        }
+    }
+}
+
+function deleteBlock(blockId) {
+    const block = document.getElementById(blockId);
+
+    if (!block) {
+        return;
+    }
+
+    block.remove();
+
+    updateBlocksSummary();
+    searchBlocks();
+}
+
+function toggleBlocksSummary(event) {
+    event.stopPropagation();
+
+    const dropdown =
+        document.getElementById("blocksDropdown");
+
+    dropdown.classList.toggle("open");
+
+    if (dropdown.classList.contains("open")) {
+        updateBlocksSummary();
+    }
+}
+
+function updateBlocksSummary() {
+    const blocks = Array.from(
+        document.querySelectorAll(".block-card")
+    );
+
+    const total = blocks.length;
+
+    document.getElementById("blocksCount").textContent =
+        total + (total === 1 ? " bloco" : " blocos");
+
+    document.getElementById(
+        "blocksDropdownSubtitle"
+    ).textContent =
+        total +
+        (total === 1
+            ? " bloco no total"
+            : " blocos no total");
+
+    const paginationText =
+        document.querySelector(".pagination-text");
+
+    if (paginationText) {
+        paginationText.textContent =
+            total === 0
+                ? "0 blocos nesta página"
+                : "1–" + total + " nesta página";
+    }
+
+    const groups = {};
+
+    blocks.forEach((block) => {
+        const category =
+            block.dataset.category || "Outros";
+
+        if (!groups[category]) {
+            groups[category] = [];
+        }
+
+        groups[category].push(block);
+    });
+
+    const summary =
+        document.getElementById("blocksSummary");
+
+    summary.innerHTML = "";
+
+    Object.entries(groups).forEach(
+        ([category, items]) => {
+
+            const categoryWrapper =
+                document.createElement("div");
+
+            categoryWrapper.className =
+                "summary-category";
+
+            const categoryButton =
+                document.createElement("button");
+
+            categoryButton.className =
+                "summary-category-button";
+
+            categoryButton.innerHTML = `
+                <span class="summary-chevron"></span>
+                <span class="summary-name">${category}</span>
+                <span class="summary-count">${items.length}</span>
+            `;
+
+            categoryButton.onclick = () => {
+                categoryWrapper.classList.toggle(
+                    "expanded"
+                );
+            };
+
+            const instances =
+                document.createElement("div");
+
+            instances.className =
+                "summary-instances";
+
+            items.forEach((block, index) => {
+
+                const button =
+                    document.createElement("button");
+
+                button.className =
+                    "summary-instance";
+
+                button.innerHTML = `
+                    <span class="summary-instance-number">${index + 1}</span>
+                    <span>${category} ${index + 1}</span>
+                `;
+
+                button.onclick = () => {
+                    navigateToBlock(block);
+
+                    document
+                        .getElementById("blocksDropdown")
+                        .classList.remove("open");
+                };
+
+                instances.appendChild(button);
+            });
+
+            categoryWrapper.appendChild(
+                categoryButton
+            );
+
+            categoryWrapper.appendChild(
+                instances
+            );
+
+            summary.appendChild(
+                categoryWrapper
+            );
+        }
+    );
+}
+
+function normalizeText(value) {
+    return value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
+function searchBlocks() {
+    const input =
+        document.getElementById("blockSearch");
+
+    const value =
+        normalizeText(input.value.trim());
+
+    clearSearchHighlights();
+
+    if (!value) {
+        searchResults = [];
+        currentSearchIndex = -1;
+        updateSearchCounter();
+        return;
+    }
+
+    const blocks = Array.from(
+        document.querySelectorAll(".block-card")
+    );
+
+    searchResults = blocks.filter((block) => {
+
+        const category = normalizeText(
+            block.dataset.category || ""
+        );
+
+        const title = normalizeText(
+            block.dataset.title || ""
+        );
+
+        return (
+            category.includes(value) ||
+            title.includes(value)
+        );
+    });
+
+    if (searchResults.length > 0) {
+        currentSearchIndex = 0;
+        goToCurrentSearchResult();
+    } else {
+        currentSearchIndex = -1;
+        showEmptySearchMessage();
+    }
+
+    updateSearchCounter();
+}
+
+function nextSearchResult() {
+    if (searchResults.length === 0) {
+        searchBlocks();
+        return;
+    }
+
+    currentSearchIndex =
+        (currentSearchIndex + 1) %
+        searchResults.length;
+
+    goToCurrentSearchResult();
+}
+
+function previousSearchResult() {
+    if (searchResults.length === 0) {
+        searchBlocks();
+        return;
+    }
+
+    currentSearchIndex =
+        (
+            currentSearchIndex -
+            1 +
+            searchResults.length
+        ) %
+        searchResults.length;
+
+    goToCurrentSearchResult();
+}
+
+function handleSearchKey(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+
+        if (event.shiftKey) {
+            previousSearchResult();
+        } else {
+            nextSearchResult();
+        }
+    }
+}
+
+function goToCurrentSearchResult() {
+    clearSearchHighlights();
+
+    if (
+        currentSearchIndex < 0 ||
+        !searchResults[currentSearchIndex]
+    ) {
+        return;
+    }
+
+    const block =
+        searchResults[currentSearchIndex];
+
+    navigateToBlock(block);
+    updateSearchCounter();
+}
+
+function navigateToBlock(block) {
+    clearSearchHighlights();
+
+    block.classList.add(
+        "search-highlight"
+    );
+
+    block.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function clearSearchHighlights() {
+    document
+        .querySelectorAll(
+            ".block-card.search-highlight"
+        )
+        .forEach((block) => {
+            block.classList.remove(
+                "search-highlight"
+            );
+        });
+}
+
+function updateSearchCounter() {
+    const counter =
+        document.getElementById(
+            "searchCounter"
+        );
+
+    const inputValue =
+        document
+            .getElementById("blockSearch")
+            .value
+            .trim();
+
+    if (!inputValue) {
+        counter.textContent = "";
+        return;
+    }
+
+    if (searchResults.length === 0) {
+        counter.textContent = "0/0";
+        return;
+    }
+
+    counter.textContent =
+        currentSearchIndex +
+        1 +
+        "/" +
+        searchResults.length;
+}
+
+function showEmptySearchMessage() {
+    const message =
+        document.getElementById(
+            "emptySearchMessage"
+        );
+
+    message.classList.add("visible");
+
+    setTimeout(() => {
+        message.classList.remove(
+            "visible"
+        );
+    }, 1500);
+}
+
+/* ARQUIVOS */
+
+function openFilesModal() {
+    const backdrop =
+        document.getElementById(
+            "filesModalBackdrop"
+        );
+
+    backdrop.classList.add("open");
+    document.body.classList.add(
+        "modal-open"
+    );
+
+    document
+        .getElementById("blocksDropdown")
+        .classList.remove("open");
+}
+
+function closeFilesModal() {
+    const backdrop =
+        document.getElementById(
+            "filesModalBackdrop"
+        );
+
+    backdrop.classList.remove("open");
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+}
+
+function handleFilesBackdropClick(event) {
+    if (
+        event.target.id ===
+        "filesModalBackdrop"
+    ) {
+        closeFilesModal();
+    }
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+
+    document
+        .getElementById("uploadZone")
+        .classList.add("dragging");
+}
+
+function handleDragLeave(event) {
+    event.preventDefault();
+
+    document
+        .getElementById("uploadZone")
+        .classList.remove("dragging");
+}
+
+function handleFileDrop(event) {
+    event.preventDefault();
+
+    document
+        .getElementById("uploadZone")
+        .classList.remove("dragging");
+
+    const files =
+        Array.from(event.dataTransfer.files);
+
+    addFiles(files);
+}
+
+function handleFileSelection(event) {
+    const files =
+        Array.from(event.target.files);
+
+    addFiles(files);
+
+    event.target.value = "";
+}
+
+function addFiles(files) {
+    files.forEach((file) => {
+
+        const alreadyAdded =
+            attachedFiles.some(
+                (existingFile) =>
+                    existingFile.name === file.name &&
+                    existingFile.size === file.size
+            );
+
+        if (!alreadyAdded) {
+            attachedFiles.push(file);
+        }
+    });
+
+    renderFiles();
+}
+
+function removeFile(index) {
+    attachedFiles.splice(index, 1);
+
+    renderFiles();
+}
+
+function renderFiles() {
+    const list =
+        document.getElementById("filesList");
+
+    const empty =
+        document.getElementById("filesEmpty");
+
+    const count =
+        document.getElementById("filesCount");
+
+    list.innerHTML = "";
+
+    count.textContent =
+        attachedFiles.length;
+
+    if (attachedFiles.length === 0) {
+        empty.style.display = "block";
+        return;
+    }
+
+    empty.style.display = "none";
+
+    attachedFiles.forEach(
+        (file, index) => {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "file-item";
+
+            item.innerHTML = `
+                <div class="file-item-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M7 3H14L19 8V21H7V3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M14 3V8H19" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+
+                <div class="file-item-info">
+                    <div class="file-item-name">
+                        ${escapeHTML(file.name)}
+                    </div>
+
+                    <div class="file-item-size">
+                        ${formatFileSize(file.size)}
+                    </div>
+                </div>
+
+                <button
+                    class="file-remove"
+                    onclick="removeFile(${index})"
+                    title="Remover arquivo"
+                >
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            `;
+
+            list.appendChild(item);
+        }
+    );
+}
+
+function formatFileSize(bytes) {
+    if (bytes < 1024) {
+        return bytes + " B";
+    }
+
+    if (bytes < 1024 * 1024) {
+        return (
+            (bytes / 1024).toFixed(1) +
+            " KB"
+        );
+    }
+
+    return (
+        (
+            bytes /
+            (1024 * 1024)
+        ).toFixed(1) +
+        " MB"
+    );
+}
+
+function escapeHTML(value) {
+    return value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+        if (event.key === "Escape") {
+            const modal =
+                document.getElementById(
+                    "filesModalBackdrop"
+                );
+
+            if (
+                modal.classList.contains(
+                    "open"
+                )
+            ) {
+                closeFilesModal();
+            }
+        }
+    }
+);
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const wrapper =
+            document.querySelector(
+                ".blocks-wrapper"
+            );
+
+        if (
+            wrapper &&
+            !wrapper.contains(event.target)
+        ) {
+            document
+                .getElementById(
+                    "blocksDropdown"
+                )
+                .classList.remove(
+                    "open"
+                );
+        }
+    }
+);
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+        updateBlocksSummary();
+        renderFiles();
+    }
+);
+</script>
+
+</body>
+</html>
