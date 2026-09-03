@@ -39,7 +39,9 @@ button,
 .blocks-chip,
 .files-button,
 .search-nav-button,
-.switch {
+.switch,
+.pagination-page,
+.pagination-arrow {
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -248,28 +250,47 @@ button,
     flex-shrink: 0;
 }
 
+/* PAGINAÇÃO */
+
 .pagination {
-    height: 34px;
-    margin-right: 58px;
+    height: 36px;
+    margin-right: 120px;
     display: flex;
     align-items: center;
-    padding: 0 9px;
+    gap: 2px;
+    padding: 0 6px;
     border-radius: 999px;
     border: 1px solid #e1e6eb;
     background: #f8fafc;
-    color: #748093;
-    font-size: 12px;
 }
 
-.pagination-arrow {
-    width: 24px;
-    height: 24px;
+.pagination-arrow,
+.pagination-page {
+    height: 28px;
+    min-width: 28px;
+    border-radius: 999px;
     background: transparent;
-    color: #8894a3;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.pagination-arrow {
+    color: #8995a4;
+}
+
+.pagination-arrow:hover:not(:disabled),
+.pagination-page:hover:not(.active) {
+    background: #edf2f7;
+}
+
+.pagination-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
 }
 
 .pagination-arrow svg {
@@ -277,28 +298,28 @@ button,
     height: 14px;
 }
 
-.pagination-text {
-    margin: 0 6px;
-    white-space: nowrap;
-}
-
-.page-number {
-    min-width: 28px;
-    height: 28px;
-    margin: 0 3px;
-    padding: 0 8px;
-    border-radius: 999px;
-    background: #0876dd;
-    color: #ffffff;
+.pagination-pages {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 2px;
+}
+
+.pagination-page {
+    padding: 0 9px;
+    color: #677487;
     font-size: 12px;
+    font-weight: 500;
+}
+
+.pagination-page.active {
+    background: #0876dd;
+    color: #ffffff;
     font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0, 89, 180, 0.15);
 }
 
 .search-box {
-    width: 260px;
+    width: 200px;
     height: 36px;
     margin-right: 12px;
     padding: 0 8px 0 11px;
@@ -391,7 +412,12 @@ button,
     box-shadow: 0 1px 2px rgba(18, 38, 63, 0.03);
     transition: 0.15s ease;
 }
-
+.files-button svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    display: block;
+}
 .files-button:hover {
     background: #f3f7fb;
     border-color: #cfd7e0;
@@ -438,7 +464,7 @@ button,
 }
 
 .basic-card {
-    padding: 22px 20px 20px;
+    padding: 20px;
 }
 
 .section-title {
@@ -448,6 +474,104 @@ button,
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: #526175;
+}
+
+
+.header-data-grid {
+    display: grid;
+    grid-template-columns: 2.4fr 0.8fr 0.8fr 0.9fr 1fr 1fr;
+    gap: 18px 14px;
+}
+
+.product-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 18px 16px;
+    margin-top: 18px;
+}
+
+.registration-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.registration-content {
+    padding: 18px 20px 20px;
+}
+
+.registration-content.hidden {
+    display: none;
+}
+
+.registration-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1.15fr 1fr 1.15fr 1fr auto;
+    gap: 18px 12px;
+    align-items: end;
+}
+
+.registration-description {
+    grid-column: 1 / -1;
+}
+
+.status-field {
+    min-width: 125px;
+}
+
+.status-control {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.status-text {
+    font-size: 12px;
+    color: #657286;
+}
+
+.status-text.active {
+    color: #172033;
+    font-weight: 600;
+}
+
+.status-switch {
+    position: relative;
+    width: 34px;
+    height: 19px;
+    border-radius: 999px;
+    background: #0876dd;
+    flex-shrink: 0;
+}
+
+.status-switch::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 2px;
+    right: 2px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(25, 37, 52, 0.25);
+}
+
+.select-like {
+    position: relative;
+    padding-right: 34px;
+}
+
+.select-like::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    border-right: 1.5px solid #8d99a8;
+    border-bottom: 1.5px solid #8d99a8;
+    transform: translateY(-65%) rotate(45deg);
 }
 
 .grid-4 {
@@ -939,14 +1063,10 @@ button,
     justify-content: center;
     color: #5f6b7a;
     cursor: pointer;
-    transition:
-        background 0.15s ease,
-        color 0.15s ease;
 }
 
 .files-modal-close:hover {
     background: #f0f3f6;
-    color: #1f2c3d;
 }
 
 .files-modal-close svg {
@@ -972,9 +1092,6 @@ button,
     align-items: center;
     justify-content: center;
     text-align: center;
-    transition:
-        border-color 0.16s ease,
-        background 0.16s ease;
 }
 
 .upload-zone.dragging {
@@ -997,7 +1114,6 @@ button,
 .upload-main-text {
     color: #6b7788;
     font-size: 15px;
-    line-height: 1.4;
 }
 
 .upload-select {
@@ -1006,10 +1122,6 @@ button,
     color: #0876dd;
     font-weight: 600;
     cursor: pointer;
-}
-
-.upload-select:hover {
-    text-decoration: underline;
 }
 
 .upload-help {
@@ -1056,12 +1168,6 @@ button,
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-}
-
-.file-item-icon svg {
-    width: 15px;
-    height: 15px;
 }
 
 .file-item-info {
@@ -1090,30 +1196,13 @@ button,
     border-radius: 7px;
     background: transparent;
     color: #8793a2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
-}
-
-.file-remove:hover {
-    color: #d84b4b;
-    background: #fff1f1;
-}
-
-.file-remove svg {
-    width: 14px;
-    height: 14px;
 }
 
 @media (max-width: 1180px) {
     .navbar-inner,
     .page {
         max-width: calc(100% - 32px);
-    }
-
-    .navbar-inner {
-        padding: 0;
     }
 
     .logo {
@@ -1157,6 +1246,22 @@ button,
     .grid-operations {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    
+    .header-data-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-data-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .registration-description {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 650px) {
@@ -1164,6 +1269,16 @@ button,
     .grid-3,
     .grid-operations {
         grid-template-columns: 1fr;
+    }
+
+    .header-data-grid,
+    .product-data-grid,
+    .registration-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-description {
+        grid-column: auto;
     }
 
     .smart-label {
@@ -1183,22 +1298,6 @@ button,
     .blocks-dropdown {
         width: 280px;
     }
-
-    .files-modal-backdrop {
-        padding: 16px;
-    }
-
-    .files-modal {
-        padding: 21px 18px 23px;
-    }
-
-    .files-modal-title {
-        font-size: 18px;
-    }
-
-    .files-modal-description {
-        font-size: 13px;
-    }
 }
 </style>
 </head>
@@ -1206,1025 +1305,1010 @@ button,
 <body>
 
 <header class="navbar">
-    <div class="navbar-inner">
+<div class="navbar-inner">
 
-        <div class="logo">
-            REAL<span>FLEX</span>
-        </div>
+    <div class="logo">
+        REAL<span>FLEX</span>
+    </div>
 
-        <div class="blocks-wrapper">
-
-            <button
-                class="blocks-chip"
-                id="blocksChip"
-                onclick="toggleBlocksSummary(event)"
-            >
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 3L21 7.5L12 12L3 7.5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M3 12L12 16.5L21 12" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M3 16.5L12 21L21 16.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                </svg>
-
-                <span id="blocksCount">
-                    6 blocos
-                </span>
-            </button>
-
-            <div
-                class="blocks-dropdown"
-                id="blocksDropdown"
-            >
-                <div class="blocks-dropdown-header">
-                    <div class="blocks-dropdown-title">
-                        Resumo dos blocos
-                    </div>
-
-                    <div
-                        class="blocks-dropdown-subtitle"
-                        id="blocksDropdownSubtitle"
-                    >
-                        6 blocos no total
-                    </div>
-                </div>
-
-                <div id="blocksSummary"></div>
-            </div>
-
-        </div>
-
-        <div class="pagination">
-
-            <button class="pagination-arrow">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <span class="pagination-text">
-                1–6 nesta página
-            </span>
-
-            <span class="page-number">
-                1
-            </span>
-
-            <button class="pagination-arrow">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-        </div>
-
-        <div class="search-box">
-
-            <span class="search-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
-                    <path d="M16 16L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-            </span>
-
-            <input
-                type="text"
-                id="blockSearch"
-                placeholder="Buscar bloco"
-                oninput="searchBlocks()"
-                onkeydown="handleSearchKey(event)"
-            >
-
-            <span
-                class="search-counter"
-                id="searchCounter"
-            ></span>
-
-            <div class="search-controls">
-
-                <button
-                    class="search-nav-button"
-                    type="button"
-                    onclick="previousSearchResult()"
-                    title="Resultado anterior"
-                >
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M6 14L12 8L18 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-                <button
-                    class="search-nav-button"
-                    type="button"
-                    onclick="nextSearchResult()"
-                    title="Próximo resultado"
-                >
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-            </div>
-
-        </div>
+    <div class="blocks-wrapper">
 
         <button
-            class="files-button"
-            onclick="openFilesModal()"
+            class="blocks-chip"
+            id="blocksChip"
+            onclick="toggleBlocksSummary(event)"
         >
-
             <svg viewBox="0 0 24 24" fill="none">
-                <path d="M8.5 12.5L14.8 6.2C16.3 4.7 18.7 4.7 20.2 6.2C21.7 7.7 21.7 10.1 20.2 11.6L11.3 20.5C8.9 22.9 5 22.9 2.6 20.5C0.2 18.1 0.2 14.2 2.6 11.8L11.2 3.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M6.4 15.1L15.1 6.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 3L21 7.5L12 12L3 7.5L12 3Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 12L12 16.5L21 12" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M3 16.5L12 21L21 16.5" stroke="currentColor" stroke-width="1.8"/>
             </svg>
 
-            Arquivos
+            <span id="blocksCount">6 blocos</span>
+        </button>
 
-            <span
-                class="files-count"
-                id="filesCount"
-            >
-                0
-            </span>
+        <div class="blocks-dropdown" id="blocksDropdown">
+            <div class="blocks-dropdown-header">
+                <div class="blocks-dropdown-title">
+                    Resumo dos blocos
+                </div>
 
+                <div
+                    class="blocks-dropdown-subtitle"
+                    id="blocksDropdownSubtitle"
+                >
+                    6 blocos no total
+                </div>
+            </div>
+
+            <div id="blocksSummary"></div>
+        </div>
+
+    </div>
+
+    <!-- PAGINAÇÃO NOVA -->
+    <div class="pagination">
+
+        <button
+            class="pagination-arrow"
+            id="previousPage"
+            onclick="previousPage()"
+        >
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </button>
+
+        <div
+            class="pagination-pages"
+            id="paginationPages"
+        ></div>
+
+        <button
+            class="pagination-arrow"
+            id="nextPage"
+            onclick="nextPage()"
+        >
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
         </button>
 
     </div>
+
+    <div class="search-box">
+
+        <span class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M16 16L21 21" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+        </span>
+
+        <input
+            type="text"
+            id="blockSearch"
+            placeholder="Buscar bloco"
+            oninput="searchBlocks()"
+            onkeydown="handleSearchKey(event)"
+        >
+
+        <span
+            class="search-counter"
+            id="searchCounter"
+        ></span>
+
+        <div class="search-controls">
+
+            <button
+                class="search-nav-button"
+                onclick="previousSearchResult()"
+            >
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M6 14L12 8L18 14" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+            </button>
+
+            <button
+                class="search-nav-button"
+                onclick="nextSearchResult()"
+            >
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M6 10L12 16L18 10" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+            </button>
+
+        </div>
+
+    </div>
+
+  <button
+    class="files-button"
+    onclick="openFilesModal()"
+>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+            d="M21.44 11.05L12.25 20.24C9.91 22.58 6.12 22.58 3.78 20.24C1.44 17.9 1.44 14.11 3.78 11.77L12.33 3.22C13.89 1.66 16.42 1.66 17.98 3.22C19.54 4.78 19.54 7.31 17.98 8.87L9.42 17.43C8.64 18.21 7.38 18.21 6.6 17.43C5.82 16.65 5.82 15.39 6.6 14.61L14.5 6.71"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+    </svg>
+
+    Arquivos
+
+    <span class="files-count" id="filesCount">
+        0
+    </span>
+</button>
+
+</div>
 </header>
 
 <main class="page">
 
-    <div class="stack" id="blocksContainer">
+<div class="stack" id="blocksContainer">
 
-        <section class="card basic-card">
+    <section class="card basic-card">
 
-            <div class="section-title">
-                DADOS BÁSICOS CADASTRAIS
+        <div class="header-data-grid">
+
+            <div class="field">
+                <div class="field-label">TÍTULO</div>
+                <div class="field-value">
+                    PLANO DO CONTROLE DE PROCESO
+                </div>
             </div>
 
-            <div class="grid-4">
-
-                <div class="field">
-                    <div class="field-label">TÍTULO</div>
-                    <div class="field-value">
-                        PLANO DO CONTROLE DE PROCESO
-                    </div>
+            <div class="field">
+                <div class="field-label">P.C N°</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
                 </div>
-
-                <div class="field">
-                    <div class="field-label">P.C N°</div>
-                    <div class="field-value">
-                        <span class="placeholder">—</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">REVISÃO</div>
-                    <div class="field-value">
-                        <span class="placeholder">—</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">DATA</div>
-                    <div class="field-value">
-                        <span class="placeholder">—</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">VERIFICAÇÃO</div>
-                    <div class="field-value">
-                        <span class="placeholder">—</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">APROVAÇÃO</div>
-                    <div class="field-value">
-                        <span class="placeholder">—</span>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">
-                        CÓDIGO DO PRODUTO
-                    </div>
-                    <div class="field-value">
-                        100%Blocos
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">
-                        NOME DO PRODUTO
-                    </div>
-                    <div class="field-value">
-                        Teste de TODOS os blocos
-                    </div>
-                </div>
-
             </div>
 
-        </section>
+            <div class="field">
+                <div class="field-label">REVISÃO</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
 
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
+            <div class="field">
+                <div class="field-label">DATA</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
 
-        <!-- BITOLA 1 -->
-        <section
-            class="card block-card"
-            id="block-bitola-1"
-            data-category="Bitola"
-            data-title="Bitola"
-        >
+            <div class="field">
+                <div class="field-label">VERIFICAÇÃO</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
 
-            <div class="block-header" id="bitola1-header">
+            <div class="field">
+                <div class="field-label">APROVAÇÃO</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
 
-                <button class="drag-icon">
-                    ⠿
-                </button>
+        </div>
 
-                <button
-                    class="expand-button"
-                    onclick="toggleBlock('bitola1')"
-                >
-                    <span class="chevron-icon"></span>
-                </button>
+        <div class="product-data-grid">
 
-                <button
-                    class="block-title-button"
-                    onclick="toggleBlock('bitola1')"
-                >
-                    <span class="block-title">
-                        BITOLA
+            <div class="field">
+                <div class="field-label">CÓDIGO DO PRODUTO</div>
+                <div class="field-value">
+                    100%Blocos
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-label">NOME DO PRODUTO</div>
+                <div class="field-value">
+                    Teste de TODOS os blocos
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="card registration-card">
+
+        <div class="block-header collapsed" id="registration-header">
+
+            <button
+                class="expand-button"
+                onclick="toggleBlock('registration')"
+                aria-label="Expandir ou recolher dados básicos cadastrais"
+            >
+                <span class="chevron-icon"></span>
+            </button>
+
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('registration')"
+            >
+                <span class="block-title">
+                    DADOS BÁSICOS CADASTRAIS
+                </span>
+            </button>
+
+        </div>
+
+        <div class="registration-content hidden" id="registration-content">
+
+        <div class="registration-grid">
+
+            <div class="field">
+                <div class="field-label">TIPO DO PRODUTO</div>
+                <div class="field-value">
+                    Mangueira
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-label">CATEGORIA DE PRODUTO</div>
+                <div class="field-value select-like">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-label">UNIDADE DE MEDIDA</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-label">CLIENTE RELACIONADO</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="field-label">SETOR</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
+
+            <div class="field status-field">
+                <div class="field-label">STATUS</div>
+                <div class="status-control">
+                    <span class="status-text">Inativo</span>
+                    <span class="status-switch" aria-hidden="true"></span>
+                    <span class="status-text active">Ativo</span>
+                </div>
+            </div>
+
+            <div class="field registration-description">
+                <div class="field-label">DESCRIÇÃO DO PRODUTO</div>
+                <div class="field-value">
+                    <span class="placeholder">—</span>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <button class="add-block">
+        <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+        Adicionar bloco aqui
+    </button>
+
+    <!-- BITOLA 1 -->
+    <section
+        class="card block-card"
+        id="block-bitola-1"
+        data-category="Bitola"
+        data-title="Bitola"
+    >
+
+        <div class="block-header" id="bitola1-header">
+
+            <button class="drag-icon">⠿</button>
+
+            <button
+                class="expand-button"
+                onclick="toggleBlock('bitola1')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
+
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('bitola1')"
+            >
+                <span class="block-title">
+                    BITOLA
+                </span>
+            </button>
+
+            <div class="block-actions">
+
+                <div class="smart-code-control">
+                    <span class="smart-label">
+                        Código inteligente
                     </span>
-                </button>
-
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">
-                            Código inteligente
-                        </span>
-
-                        <button
-                            class="switch"
-                            id="bitola1-switch"
-                            onclick="toggleSmartCode('bitola1')"
-                        ></button>
-                    </div>
 
                     <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-bitola-1')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                            <path d="M9 3H15L16 5H8L9 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                            <path d="M7 7L8 21H16L17 7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                            <path d="M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-
+                        class="switch"
+                        id="bitola1-switch"
+                        onclick="toggleSmartCode('bitola1')"
+                    ></button>
                 </div>
-
-            </div>
-
-            <div class="block-content" id="bitola1-content">
-
-                <div class="grid-3">
-
-                    <div class="field">
-                        <div class="field-label">NUMERO LONAS (UN)</div>
-                        <div class="field-value">1</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">NUMERO DE PEÇAS (UN)</div>
-                        <div class="field-value">6</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
-                        <div class="field-value">80,00</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">COMPRIMENTO DA PEÇA (M)</div>
-                        <div class="field-value">20,00</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">DIAMETRO INTERNO MINIMO (MM)</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">PAREDE (MM)</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">PESO CALCULADO (KG/M)</div>
-                        <div class="field-value"><span class="placeholder">Calculado</span></div>
-                    </div>
-
-                </div>
-
-                <div class="smart-extension" id="bitola1-smart">
-
-                    <div class="smart-extension-header">
-
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-
-                        <span class="smart-extension-title">
-                            Código inteligente
-                        </span>
-
-                        <span class="smart-extension-subtitle">
-                            Configuração adicional
-                        </span>
-
-                    </div>
-
-                    <div class="grid-4">
-
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="operations-box">
-
-                    <div class="operations-header">
-                        <span class="operations-title">OPERAÇÕES</span>
-
-                        <button class="operation-button">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
-                            Operação
-                        </button>
-                    </div>
-
-                    <div class="operation-row">
-
-                        <div class="grid-operations">
-
-                            <div class="field">
-                                <div class="field-label">OPERAÇÃO</div>
-                                <div class="field-value"><span class="placeholder">—</span></div>
-                            </div>
-
-                            <div class="field">
-                                <div class="field-label">TIPO DE OPERAÇÃO</div>
-                                <div class="field-value"><span class="placeholder">—</span></div>
-                            </div>
-
-                            <div class="field">
-                                <div class="field-label">QTD_VAR</div>
-                                <div class="field-value"><span class="placeholder">—</span></div>
-                            </div>
-
-                            <div class="field">
-                                <div class="field-label">TEMPO EM MINUTOS</div>
-                                <div class="field-value"><span class="placeholder">—</span></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
-
-        <!-- DESENGRAXAMENTO 1 -->
-        <section
-            class="card block-card"
-            id="block-desengraxamento-1"
-            data-category="Desengraxamento"
-            data-title="Desengraxamento"
-        >
-
-            <div class="block-header" id="desengraxamento1-header">
-
-                <button class="drag-icon">⠿</button>
 
                 <button
-                    class="expand-button"
-                    onclick="toggleBlock('desengraxamento1')"
+                    class="delete-block"
+                    onclick="deleteBlock('block-bitola-1')"
                 >
-                    <span class="chevron-icon"></span>
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7"/>
+                    </svg>
                 </button>
+
+            </div>
+
+        </div>
+
+        <div class="block-content" id="bitola1-content">
+
+            <div class="grid-3">
+
+                <div class="field">
+                    <div class="field-label">NUMERO LONAS (UN)</div>
+                    <div class="field-value">1</div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">NUMERO DE PEÇAS (UN)</div>
+                    <div class="field-value">6</div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
+                    <div class="field-value">80,00</div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">COMPRIMENTO DA PEÇA (M)</div>
+                    <div class="field-value">20,00</div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">DIAMETRO INTERNO MINIMO (MM)</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">PAREDE (MM)</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">PESO CALCULADO (KG/M)</div>
+                    <div class="field-value"><span class="placeholder">Calculado</span></div>
+                </div>
+
+            </div>
+
+            <div
+                class="smart-extension"
+                id="bitola1-smart"
+            >
+                <div class="smart-extension-header">
+                    <div class="smart-extension-icon">✦</div>
+                    <span class="smart-extension-title">
+                        Código inteligente
+                    </span>
+                    <span class="smart-extension-subtitle">
+                        Configuração adicional
+                    </span>
+                </div>
+
+                <div class="grid-4">
+                    <div class="field smart-field">
+                        <div class="field-label">TIPO DE CÓDIGO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field smart-field">
+                        <div class="field-label">PREFIXO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field smart-field">
+                        <div class="field-label">SEQUÊNCIA</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field smart-field">
+                        <div class="field-label">FORMATO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="operations-box">
+
+                <div class="operations-header">
+                    <span class="operations-title">
+                        OPERAÇÕES
+                    </span>
+
+                    <button class="operation-button">
+                        + Operação
+                    </button>
+                </div>
+
+                <div class="operation-row">
+
+                    <div class="grid-operations">
+
+                        <div class="field">
+                            <div class="field-label">OPERAÇÃO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-label">TIPO DE OPERAÇÃO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-label">QTD_VAR</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-label">TEMPO EM MINUTOS</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
+
+    <!-- DESENGRAXAMENTO 1 -->
+    <section
+        class="card block-card"
+        id="block-desengraxamento-1"
+        data-category="Desengraxamento"
+        data-title="Desengraxamento"
+    >
+
+        <div class="block-header" id="desengraxamento1-header">
+
+            <button class="drag-icon">⠿</button>
+
+            <button
+                class="expand-button"
+                onclick="toggleBlock('desengraxamento1')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
+
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('desengraxamento1')"
+            >
+                <span class="block-title">
+                    Desengraxamento
+                </span>
+            </button>
+
+            <div class="block-actions">
+
+                <div class="smart-code-control">
+                    <span class="smart-label">Código inteligente</span>
+
+                    <button
+                        class="switch"
+                        id="desengraxamento1-switch"
+                        onclick="toggleSmartCode('desengraxamento1')"
+                    ></button>
+                </div>
 
                 <button
-                    class="block-title-button"
-                    onclick="toggleBlock('desengraxamento1')"
+                    class="delete-block"
+                    onclick="deleteBlock('block-desengraxamento-1')"
                 >
-                    <span class="block-title">Desengraxamento</span>
+                    🗑
                 </button>
 
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">Código inteligente</span>
-
-                        <button
-                            class="switch"
-                            id="desengraxamento1-switch"
-                            onclick="toggleSmartCode('desengraxamento1')"
-                        ></button>
-                    </div>
-
-                    <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-desengraxamento-1')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-
-                </div>
-
             </div>
 
-            <div class="block-content" id="desengraxamento1-content">
+        </div>
 
-                <div class="grid-3">
-
-                    <div class="field">
-                        <div class="field-label">CÓDIGO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">CONCENTRAÇÃO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">TEMPERATURA</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                </div>
-
-                <div class="smart-extension" id="desengraxamento1-smart">
-
-                    <div class="smart-extension-header">
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-
-                        <span class="smart-extension-title">Código inteligente</span>
-                        <span class="smart-extension-subtitle">Configuração adicional</span>
-                    </div>
-
-                    <div class="grid-4">
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
-
-        <!-- BITOLA 2 -->
-        <section
-            class="card block-card"
-            id="block-bitola-2"
-            data-category="Bitola"
-            data-title="Bitola"
+        <div
+            class="block-content"
+            id="desengraxamento1-content"
         >
 
-            <div class="block-header collapsed" id="bitola2-header">
+            <div class="grid-3">
 
-                <button class="drag-icon">⠿</button>
+                <div class="field">
+                    <div class="field-label">CÓDIGO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
 
-                <button class="expand-button" onclick="toggleBlock('bitola2')">
-                    <span class="chevron-icon"></span>
-                </button>
+                <div class="field">
+                    <div class="field-label">CONCENTRAÇÃO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
 
-                <button class="block-title-button" onclick="toggleBlock('bitola2')">
-                    <span class="block-title">BITOLA</span>
-                </button>
-
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">Código inteligente</span>
-                        <button
-                            class="switch"
-                            id="bitola2-switch"
-                            onclick="toggleSmartCode('bitola2')"
-                        ></button>
-                    </div>
-
-                    <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-bitola-2')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-
+                <div class="field">
+                    <div class="field-label">TEMPERATURA</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
                 </div>
 
             </div>
 
-            <div class="block-content hidden" id="bitola2-content">
-
-                <div class="grid-3">
-                    <div class="field">
-                        <div class="field-label">NUMERO LONAS (UN)</div>
-                        <div class="field-value">1</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">NUMERO DE PEÇAS (UN)</div>
-                        <div class="field-value">6</div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
-                        <div class="field-value">80,00</div>
-                    </div>
+            <div
+                class="smart-extension"
+                id="desengraxamento1-smart"
+            >
+                <div class="smart-extension-header">
+                    <div class="smart-extension-icon">✦</div>
+                    <span class="smart-extension-title">
+                        Código inteligente
+                    </span>
+                    <span class="smart-extension-subtitle">
+                        Configuração adicional
+                    </span>
                 </div>
 
-                <div class="smart-extension" id="bitola2-smart">
+                <div class="grid-4">
 
-                    <div class="smart-extension-header">
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-
-                        <span class="smart-extension-title">Código inteligente</span>
-                        <span class="smart-extension-subtitle">Configuração adicional</span>
+                    <div class="field smart-field">
+                        <div class="field-label">TIPO DE CÓDIGO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
                     </div>
 
-                    <div class="grid-4">
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+                    <div class="field smart-field">
+                        <div class="field-label">PREFIXO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
 
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+                    <div class="field smart-field">
+                        <div class="field-label">SEQUÊNCIA</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
 
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+                    <div class="field smart-field">
+                        <div class="field-label">FORMATO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
                     </div>
 
                 </div>
-
             </div>
 
-        </section>
+        </div>
 
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
+    </section>
 
-        <!-- ACESSORIOS -->
-        <section
-            class="card block-card"
-            id="block-acessorios-1"
-            data-category="Acessórios"
-            data-title="Acessórios"
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
+
+    <!-- BITOLA 2 -->
+    <section
+        class="card block-card"
+        id="block-bitola-2"
+        data-category="Bitola"
+        data-title="Bitola"
+    >
+
+        <div
+            class="block-header collapsed"
+            id="bitola2-header"
         >
 
-            <div class="block-header collapsed" id="acessorios1-header">
+            <button class="drag-icon">⠿</button>
 
-                <button class="drag-icon">⠿</button>
+            <button
+                class="expand-button"
+                onclick="toggleBlock('bitola2')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
 
-                <button class="expand-button" onclick="toggleBlock('acessorios1')">
-                    <span class="chevron-icon"></span>
-                </button>
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('bitola2')"
+            >
+                <span class="block-title">BITOLA</span>
+            </button>
 
-                <button class="block-title-button" onclick="toggleBlock('acessorios1')">
-                    <span class="block-title">Acessórios</span>
-                </button>
-
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">Código inteligente</span>
-                        <button
-                            class="switch"
-                            id="acessorios1-switch"
-                            onclick="toggleSmartCode('acessorios1')"
-                        ></button>
-                    </div>
-
+            <div class="block-actions">
+                <div class="smart-code-control">
+                    <span class="smart-label">Código inteligente</span>
                     <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-acessorios-1')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-
+                        class="switch"
+                        id="bitola2-switch"
+                        onclick="toggleSmartCode('bitola2')"
+                    ></button>
                 </div>
 
+                <button
+                    class="delete-block"
+                    onclick="deleteBlock('block-bitola-2')"
+                >
+                    🗑
+                </button>
             </div>
 
-            <div class="block-content hidden" id="acessorios1-content">
+        </div>
 
-                <div class="grid-3">
-
-                    <div class="field">
-                        <div class="field-label">CÓDIGO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">TIPO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field">
-                        <div class="field-label">QUANTIDADE</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                </div>
-
-                <div class="smart-extension" id="acessorios1-smart">
-
-                    <div class="smart-extension-header">
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-
-                        <span class="smart-extension-title">Código inteligente</span>
-                        <span class="smart-extension-subtitle">Configuração adicional</span>
-                    </div>
-
-                    <div class="grid-4">
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
-
-        <!-- DESENGRAXAMENTO 2 -->
-        <section
-            class="card block-card"
-            id="block-desengraxamento-2"
-            data-category="Desengraxamento"
-            data-title="Desengraxamento"
+        <div
+            class="block-content hidden"
+            id="bitola2-content"
         >
 
-            <div class="block-header collapsed" id="desengraxamento2-header">
+            <div class="grid-3">
 
-                <button class="drag-icon">⠿</button>
+                <div class="field">
+                    <div class="field-label">NUMERO LONAS (UN)</div>
+                    <div class="field-value">1</div>
+                </div>
 
-                <button class="expand-button" onclick="toggleBlock('desengraxamento2')">
-                    <span class="chevron-icon"></span>
-                </button>
+                <div class="field">
+                    <div class="field-label">NUMERO DE PEÇAS (UN)</div>
+                    <div class="field-value">6</div>
+                </div>
 
-                <button class="block-title-button" onclick="toggleBlock('desengraxamento2')">
-                    <span class="block-title">Desengraxamento</span>
-                </button>
-
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">Código inteligente</span>
-                        <button
-                            class="switch"
-                            id="desengraxamento2-switch"
-                            onclick="toggleSmartCode('desengraxamento2')"
-                        ></button>
-                    </div>
-
-                    <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-desengraxamento-2')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-
+                <div class="field">
+                    <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
+                    <div class="field-value">80,00</div>
                 </div>
 
             </div>
 
-            <div class="block-content hidden" id="desengraxamento2-content">
+            <div
+                class="smart-extension"
+                id="bitola2-smart"
+            >
+                <div class="smart-extension-header">
+                    <div class="smart-extension-icon">✦</div>
+                    <span class="smart-extension-title">
+                        Código inteligente
+                    </span>
+                    <span class="smart-extension-subtitle">
+                        Configuração adicional
+                    </span>
+                </div>
 
-                <div class="grid-3">
+                <div class="grid-4">
 
-                    <div class="field">
-                        <div class="field-label">CÓDIGO</div>
+                    <div class="field smart-field">
+                        <div class="field-label">TIPO DE CÓDIGO</div>
                         <div class="field-value"><span class="placeholder">—</span></div>
                     </div>
 
-                    <div class="field">
-                        <div class="field-label">CONCENTRAÇÃO</div>
+                    <div class="field smart-field">
+                        <div class="field-label">PREFIXO</div>
                         <div class="field-value"><span class="placeholder">—</span></div>
                     </div>
 
-                    <div class="field">
-                        <div class="field-label">TEMPERATURA</div>
+                    <div class="field smart-field">
+                        <div class="field-label">SEQUÊNCIA</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field smart-field">
+                        <div class="field-label">FORMATO</div>
                         <div class="field-value"><span class="placeholder">—</span></div>
                     </div>
 
                 </div>
-
-                <div class="smart-extension" id="desengraxamento2-smart">
-
-                    <div class="smart-extension-header">
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
-
-                        <span class="smart-extension-title">Código inteligente</span>
-                        <span class="smart-extension-subtitle">Configuração adicional</span>
-                    </div>
-
-                    <div class="grid-4">
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
-        </section>
+        </div>
 
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
+    </section>
 
-        <!-- EMBALAGEM -->
-        <section
-            class="card block-card"
-            id="block-embalagem-1"
-            data-category="Embalagem"
-            data-title="Embalagem"
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
+
+    <!-- ACESSORIOS -->
+    <section
+        class="card block-card"
+        id="block-acessorios-1"
+        data-category="Acessórios"
+        data-title="Acessórios"
+    >
+
+        <div
+            class="block-header collapsed"
+            id="acessorios1-header"
         >
 
-            <div class="block-header collapsed" id="embalagem1-header">
+            <button class="drag-icon">⠿</button>
 
-                <button class="drag-icon">⠿</button>
+            <button
+                class="expand-button"
+                onclick="toggleBlock('acessorios1')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
 
-                <button class="expand-button" onclick="toggleBlock('embalagem1')">
-                    <span class="chevron-icon"></span>
-                </button>
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('acessorios1')"
+            >
+                <span class="block-title">
+                    Acessórios
+                </span>
+            </button>
 
-                <button class="block-title-button" onclick="toggleBlock('embalagem1')">
-                    <span class="block-title">Embalagem</span>
-                </button>
-
-                <div class="block-actions">
-
-                    <div class="smart-code-control">
-                        <span class="smart-label">Código inteligente</span>
-
-                        <button
-                            class="switch"
-                            id="embalagem1-switch"
-                            onclick="toggleSmartCode('embalagem1')"
-                        ></button>
-                    </div>
+            <div class="block-actions">
+                <div class="smart-code-control">
+                    <span class="smart-label">
+                        Código inteligente
+                    </span>
 
                     <button
-                        class="delete-block"
-                        onclick="deleteBlock('block-embalagem-1')"
-                    >
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7H20M9 3H15L16 5H8L9 3ZM7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
+                        class="switch"
+                        id="acessorios1-switch"
+                        onclick="toggleSmartCode('acessorios1')"
+                    ></button>
+                </div>
 
+                <button
+                    class="delete-block"
+                    onclick="deleteBlock('block-acessorios-1')"
+                >
+                    🗑
+                </button>
+            </div>
+
+        </div>
+
+        <div
+            class="block-content hidden"
+            id="acessorios1-content"
+        >
+
+            <div class="grid-3">
+
+                <div class="field">
+                    <div class="field-label">CÓDIGO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">TIPO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">QUANTIDADE</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
                 </div>
 
             </div>
 
-            <div class="block-content hidden" id="embalagem1-content">
+        </div>
 
-                <div class="grid-3">
+    </section>
 
-                    <div class="field">
-                        <div class="field-label">TIPO DE EMBALAGEM</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
 
-                    <div class="field">
-                        <div class="field-label">QUANTIDADE</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
+    <!-- DESENGRAXAMENTO 2 -->
+    <section
+        class="card block-card"
+        id="block-desengraxamento-2"
+        data-category="Desengraxamento"
+        data-title="Desengraxamento"
+    >
 
-                    <div class="field">
-                        <div class="field-label">OBSERVAÇÃO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
+        <div
+            class="block-header collapsed"
+            id="desengraxamento2-header"
+        >
 
+            <button class="drag-icon">⠿</button>
+
+            <button
+                class="expand-button"
+                onclick="toggleBlock('desengraxamento2')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
+
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('desengraxamento2')"
+            >
+                <span class="block-title">
+                    Desengraxamento
+                </span>
+            </button>
+
+            <div class="block-actions">
+                <div class="smart-code-control">
+                    <span class="smart-label">
+                        Código inteligente
+                    </span>
+
+                    <button
+                        class="switch"
+                        id="desengraxamento2-switch"
+                        onclick="toggleSmartCode('desengraxamento2')"
+                    ></button>
                 </div>
 
-                <div class="smart-extension" id="embalagem1-smart">
+                <button
+                    class="delete-block"
+                    onclick="deleteBlock('block-desengraxamento-2')"
+                >
+                    🗑
+                </button>
+            </div>
 
-                    <div class="smart-extension-header">
-                        <div class="smart-extension-icon">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" stroke="currentColor" stroke-width="1.5"/>
-                            </svg>
-                        </div>
+        </div>
 
-                        <span class="smart-extension-title">Código inteligente</span>
-                        <span class="smart-extension-subtitle">Configuração adicional</span>
-                    </div>
+        <div
+            class="block-content hidden"
+            id="desengraxamento2-content"
+        >
 
-                    <div class="grid-4">
-                        <div class="field smart-field">
-                            <div class="field-label">TIPO DE CÓDIGO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+            <div class="grid-3">
 
-                        <div class="field smart-field">
-                            <div class="field-label">PREFIXO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+                <div class="field">
+                    <div class="field-label">CÓDIGO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
 
-                        <div class="field smart-field">
-                            <div class="field-label">SEQUÊNCIA</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
+                <div class="field">
+                    <div class="field-label">CONCENTRAÇÃO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
 
-                        <div class="field smart-field">
-                            <div class="field-label">FORMATO</div>
-                            <div class="field-value"><span class="placeholder">—</span></div>
-                        </div>
-                    </div>
-
+                <div class="field">
+                    <div class="field-label">TEMPERATURA</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
                 </div>
 
             </div>
 
-        </section>
+        </div>
 
-        <button class="add-block">
-            <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            Adicionar bloco aqui
-        </button>
+    </section>
 
-    </div>
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
 
+    <!-- EMBALAGEM -->
+    <section
+        class="card block-card"
+        id="block-embalagem-1"
+        data-category="Embalagem"
+        data-title="Embalagem"
+    >
+
+        <div
+            class="block-header collapsed"
+            id="embalagem1-header"
+        >
+
+            <button class="drag-icon">⠿</button>
+
+            <button
+                class="expand-button"
+                onclick="toggleBlock('embalagem1')"
+            >
+                <span class="chevron-icon"></span>
+            </button>
+
+            <button
+                class="block-title-button"
+                onclick="toggleBlock('embalagem1')"
+            >
+                <span class="block-title">
+                    Embalagem
+                </span>
+            </button>
+
+            <div class="block-actions">
+                <div class="smart-code-control">
+                    <span class="smart-label">
+                        Código inteligente
+                    </span>
+
+                    <button
+                        class="switch"
+                        id="embalagem1-switch"
+                        onclick="toggleSmartCode('embalagem1')"
+                    ></button>
+                </div>
+
+                <button
+                    class="delete-block"
+                    onclick="deleteBlock('block-embalagem-1')"
+                >
+                    🗑
+                </button>
+            </div>
+
+        </div>
+
+        <div
+            class="block-content hidden"
+            id="embalagem1-content"
+        >
+
+            <div class="grid-3">
+
+                <div class="field">
+                    <div class="field-label">TIPO DE EMBALAGEM</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">QUANTIDADE</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">OBSERVAÇÃO</div>
+                    <div class="field-value"><span class="placeholder">—</span></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <button class="add-block">
+        <span>＋</span>
+        Adicionar bloco aqui
+    </button>
+
+</div>
 </main>
 
 <div class="save-bar">
-
-    <span class="unsaved">
-        Alterações não salvas
-    </span>
-
     <button class="cancel-button">
-        <span>⊘</span>
-        Cancelar
+        ⊘ Cancelar
     </button>
 
     <button class="save-button">
-        <span>▣</span>
-        Modificar
+        ▣ Modificar
     </button>
-
 </div>
 
 <div
@@ -2242,183 +2326,707 @@ button,
     onclick="handleFilesBackdropClick(event)"
 >
 
-    <div
-        class="files-modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="filesModalTitle"
-    >
+<div class="files-modal">
 
-        <div class="files-modal-header">
+    <div class="files-modal-header">
 
-            <div>
-                <h2
-                    class="files-modal-title"
-                    id="filesModalTitle"
-                >
-                    Arquivos
-                </h2>
-            </div>
+        <h2 class="files-modal-title">
+            Arquivos
+        </h2>
 
-            <button
-                class="files-modal-close"
-                onclick="closeFilesModal()"
-                aria-label="Fechar"
-            >
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M6 6L18 18M18 6L6 18"
-                        stroke="currentColor"
-                        stroke-width="1.7"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </button>
-
-        </div>
-
-        <p class="files-modal-description">
-            Anexe documentos, desenhos técnicos ou imagens relacionados à ficha.
-        </p>
-
-        <div
-            class="upload-zone"
-            id="uploadZone"
-            ondragover="handleDragOver(event)"
-            ondragleave="handleDragLeave(event)"
-            ondrop="handleFileDrop(event)"
+        <button
+            class="files-modal-close"
+            onclick="closeFilesModal()"
         >
-
-            <div class="upload-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M12 16V4M12 4L7.5 8.5M12 4L16.5 8.5"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        d="M5 14V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V14"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linecap="round"
-                    />
-                </svg>
-            </div>
-
-            <div class="upload-main-text">
-                Arraste arquivos aqui ou
-
-                <button
-                    class="upload-select"
-                    onclick="document.getElementById('fileInput').click()"
-                >
-                    selecione do computador
-                </button>
-            </div>
-
-            <div class="upload-help">
-                PDF, imagens ou planilhas
-            </div>
-
-            <input
-                type="file"
-                id="fileInput"
-                class="file-input"
-                multiple
-                accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.xls,.xlsx,.csv"
-                onchange="handleFileSelection(event)"
-            >
-
-        </div>
-
-        <div
-            class="files-empty"
-            id="filesEmpty"
-        >
-            Nenhum arquivo anexado ainda.
-        </div>
-
-        <div
-            class="files-list"
-            id="filesList"
-        ></div>
+            ✕
+        </button>
 
     </div>
 
+    <p class="files-modal-description">
+        Anexe documentos, desenhos técnicos ou imagens relacionados à ficha.
+    </p>
+
+    <div
+        class="upload-zone"
+        id="uploadZone"
+        ondragover="handleDragOver(event)"
+        ondragleave="handleDragLeave(event)"
+        ondrop="handleFileDrop(event)"
+    >
+
+        <div class="upload-icon">
+            ↑
+        </div>
+
+        <div class="upload-main-text">
+            Arraste arquivos aqui ou
+
+            <button
+                class="upload-select"
+                onclick="document.getElementById('fileInput').click()"
+            >
+                selecione do computador
+            </button>
+        </div>
+
+        <div class="upload-help">
+            PDF, imagens ou planilhas
+        </div>
+
+        <input
+            type="file"
+            id="fileInput"
+            class="file-input"
+            multiple
+            onchange="handleFileSelection(event)"
+        >
+
+    </div>
+
+    <div
+        class="files-empty"
+        id="filesEmpty"
+    >
+        Nenhum arquivo anexado ainda.
+    </div>
+
+    <div
+        class="files-list"
+        id="filesList"
+    ></div>
+
+</div>
 </div>
 
 <script>
+const BLOCKS_PER_PAGE = 20;
+
+let currentPage = 1;
 let searchResults = [];
 let currentSearchIndex = -1;
 let attachedFiles = [];
 
+const DEMO_TOTAL_BLOCKS = 45;
+
+function createDemoBlocks() {
+    const container = document.getElementById("blocksContainer");
+
+    if (!container) {
+        return;
+    }
+
+    const existingBlocks = Array.from(
+        container.querySelectorAll(".block-card")
+    );
+
+    const amountToCreate =
+        Math.max(
+            0,
+            DEMO_TOTAL_BLOCKS - existingBlocks.length
+        );
+
+    if (amountToCreate === 0) {
+        return;
+    }
+
+    const categories = [
+        "Bitola",
+        "Desengraxamento",
+        "Acessórios",
+        "Embalagem",
+        "Vulcanização",
+        "Inspeção"
+    ];
+
+    const lastAddButton =
+        container.lastElementChild &&
+        container.lastElementChild.classList.contains("add-block")
+            ? container.lastElementChild
+            : null;
+
+    for (let i = 0; i < amountToCreate; i++) {
+        const absoluteIndex =
+            existingBlocks.length + i + 1;
+
+        const category =
+            categories[i % categories.length];
+
+        const slug =
+            "demo-" + absoluteIndex;
+
+        const addButton =
+            document.createElement("button");
+
+        addButton.className =
+            "add-block";
+
+        addButton.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M12 5V19M5 12H19"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                />
+            </svg>
+
+            Adicionar bloco aqui
+        `;
+
+        const section =
+            document.createElement("section");
+
+        section.className =
+            "card block-card";
+
+        section.id =
+            "block-" + slug;
+
+        section.dataset.category =
+            category;
+
+        section.dataset.title =
+            category;
+
+        section.innerHTML = `
+            <div
+                class="block-header collapsed"
+                id="${slug}-header"
+            >
+
+                <button class="drag-icon">
+                    ⠿
+                </button>
+
+                <button
+                    class="expand-button"
+                    onclick="toggleBlock('${slug}')"
+                >
+                    <span class="chevron-icon"></span>
+                </button>
+
+                <button
+                    class="block-title-button"
+                    onclick="toggleBlock('${slug}')"
+                >
+                    <span class="block-title">
+                        ${category}
+                    </span>
+                </button>
+
+                <div class="block-actions">
+
+                    <div class="smart-code-control">
+
+                        <span class="smart-label">
+                            Código inteligente
+                        </span>
+
+                        <button
+                            class="switch"
+                            id="${slug}-switch"
+                            onclick="toggleSmartCode('${slug}')"
+                        ></button>
+
+                    </div>
+
+                    <button
+                        class="delete-block"
+                        onclick="deleteBlock('block-${slug}')"
+                        title="Excluir bloco"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M4 7H20"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+
+                            <path
+                                d="M7 7L8 21H16L17 7"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linejoin="round"
+                            />
+
+                            <path
+                                d="M10 11V17M14 11V17"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div
+                class="block-content hidden"
+                id="${slug}-content"
+            >
+
+                <div class="grid-3">
+
+                    <div class="field">
+                        <div class="field-label">
+                            CÓDIGO
+                        </div>
+
+                        <div class="field-value">
+                            DEMO-${String(absoluteIndex).padStart(3, "0")}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">
+                            DESCRIÇÃO
+                        </div>
+
+                        <div class="field-value">
+                            Bloco de demonstração ${absoluteIndex}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">
+                            VALOR
+                        </div>
+
+                        <div class="field-value">
+                            <span class="placeholder">
+                                —
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    class="smart-extension"
+                    id="${slug}-smart"
+                >
+
+                    <div class="smart-extension-header">
+
+                        <div class="smart-extension-icon">
+                            ✦
+                        </div>
+
+                        <span class="smart-extension-title">
+                            Código inteligente
+                        </span>
+
+                        <span class="smart-extension-subtitle">
+                            Configuração adicional
+                        </span>
+
+                    </div>
+
+                    <div class="grid-4">
+
+                        <div class="field smart-field">
+                            <div class="field-label">
+                                TIPO DE CÓDIGO
+                            </div>
+
+                            <div class="field-value">
+                                <span class="placeholder">
+                                    —
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">
+                                PREFIXO
+                            </div>
+
+                            <div class="field-value">
+                                <span class="placeholder">
+                                    —
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">
+                                SEQUÊNCIA
+                            </div>
+
+                            <div class="field-value">
+                                <span class="placeholder">
+                                    —
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field smart-field">
+                            <div class="field-label">
+                                FORMATO
+                            </div>
+
+                            <div class="field-value">
+                                <span class="placeholder">
+                                    —
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        if (lastAddButton) {
+            container.insertBefore(
+                addButton,
+                lastAddButton
+            );
+
+            container.insertBefore(
+                section,
+                lastAddButton
+            );
+        } else {
+            container.appendChild(
+                addButton
+            );
+
+            container.appendChild(
+                section
+            );
+        }
+    }
+}
+
+function getBlocks() {
+    return Array.from(
+        document.querySelectorAll(".block-card")
+    );
+}
+
+function getTotalPages() {
+    const total = getBlocks().length;
+
+    return Math.max(
+        1,
+        Math.ceil(total / BLOCKS_PER_PAGE)
+    );
+}
+
+function renderPagination() {
+    const totalPages = getTotalPages();
+
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+
+    const pages =
+        document.getElementById("paginationPages");
+
+    pages.innerHTML = "";
+
+    for (
+        let page = 1;
+        page <= totalPages;
+        page++
+    ) {
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "pagination-page" +
+            (page === currentPage
+                ? " active"
+                : "");
+
+        button.textContent = page;
+
+        button.onclick = () => {
+            goToPage(page);
+        };
+
+        pages.appendChild(button);
+    }
+
+    document.getElementById(
+        "previousPage"
+    ).disabled =
+        currentPage === 1;
+
+    document.getElementById(
+        "nextPage"
+    ).disabled =
+        currentPage === totalPages;
+}
+
+function renderCurrentPage() {
+    const blocks = getBlocks();
+
+    const start =
+        (currentPage - 1) *
+        BLOCKS_PER_PAGE;
+
+    const end =
+        start + BLOCKS_PER_PAGE;
+
+    blocks.forEach(
+        (block, index) => {
+
+            const visible =
+                index >= start &&
+                index < end;
+
+            block.style.display =
+                visible
+                    ? ""
+                    : "none";
+
+            const previous =
+                block.previousElementSibling;
+
+            if (
+                previous &&
+                previous.classList.contains(
+                    "add-block"
+                )
+            ) {
+                previous.style.display =
+                    visible
+                        ? ""
+                        : "none";
+            }
+        }
+    );
+
+    const addButtons =
+        Array.from(
+            document.querySelectorAll(
+                ".add-block"
+            )
+        );
+
+    const visibleBlocks =
+        blocks.filter(
+            (block) =>
+                block.style.display !==
+                "none"
+        );
+
+    addButtons.forEach((button) => {
+        const next =
+            button.nextElementSibling;
+
+        const previous =
+            button.previousElementSibling;
+
+        const nextVisible =
+            next &&
+            next.classList.contains(
+                "block-card"
+            ) &&
+            next.style.display !== "none";
+
+        const previousVisible =
+            previous &&
+            previous.classList.contains(
+                "block-card"
+            ) &&
+            previous.style.display !== "none";
+
+        if (
+            nextVisible ||
+            previousVisible
+        ) {
+            button.style.display = "";
+        }
+    });
+
+    renderPagination();
+}
+
+function goToPage(page, scrollTop = true) {
+    const totalPages = getTotalPages();
+
+    currentPage = Math.max(
+        1,
+        Math.min(page, totalPages)
+    );
+
+    renderCurrentPage();
+
+    if (scrollTop) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+}
+
+function previousPage() {
+    if (currentPage > 1) {
+        goToPage(currentPage - 1);
+    }
+}
+
+function nextPage() {
+    if (
+        currentPage <
+        getTotalPages()
+    ) {
+        goToPage(currentPage + 1);
+    }
+}
+
+function getBlockPage(block) {
+    const blocks = getBlocks();
+
+    const index =
+        blocks.indexOf(block);
+
+    return (
+        Math.floor(
+            index /
+            BLOCKS_PER_PAGE
+        ) + 1
+    );
+}
+
 function toggleBlock(blockName) {
-    const content = document.getElementById(blockName + "-content");
-    const header = document.getElementById(blockName + "-header");
+    const content =
+        document.getElementById(
+            blockName + "-content"
+        );
+
+    const header =
+        document.getElementById(
+            blockName + "-header"
+        );
 
     if (!content || !header) {
         return;
     }
 
-    const isHidden = content.classList.contains("hidden");
+    const hidden =
+        content.classList.contains(
+            "hidden"
+        );
 
-    if (isHidden) {
-        content.classList.remove("hidden");
-        header.classList.remove("collapsed");
-    } else {
-        content.classList.add("hidden");
-        header.classList.add("collapsed");
-    }
+    content.classList.toggle(
+        "hidden",
+        !hidden
+    );
+
+    header.classList.toggle(
+        "collapsed",
+        !hidden
+    );
 }
 
 function toggleSmartCode(blockName) {
-    const switchElement = document.getElementById(blockName + "-switch");
-    const extension = document.getElementById(blockName + "-smart");
-    const content = document.getElementById(blockName + "-content");
-    const header = document.getElementById(blockName + "-header");
+    const switchElement =
+        document.getElementById(
+            blockName + "-switch"
+        );
 
-    if (!switchElement || !extension) {
+    const extension =
+        document.getElementById(
+            blockName + "-smart"
+        );
+
+    const content =
+        document.getElementById(
+            blockName + "-content"
+        );
+
+    const header =
+        document.getElementById(
+            blockName + "-header"
+        );
+
+    if (
+        !switchElement ||
+        !extension
+    ) {
         return;
     }
 
-    const willActivate =
-        !switchElement.classList.contains("active");
+    const activate =
+        !switchElement.classList.contains(
+            "active"
+        );
 
     switchElement.classList.toggle(
         "active",
-        willActivate
+        activate
     );
 
     extension.classList.toggle(
         "visible",
-        willActivate
+        activate
     );
 
     if (
-        willActivate &&
+        activate &&
         content &&
-        content.classList.contains("hidden")
+        content.classList.contains(
+            "hidden"
+        )
     ) {
-        content.classList.remove("hidden");
+        content.classList.remove(
+            "hidden"
+        );
 
-        if (header) {
-            header.classList.remove("collapsed");
-        }
+        header.classList.remove(
+            "collapsed"
+        );
     }
 }
 
 function deleteBlock(blockId) {
-    const block = document.getElementById(blockId);
+    const block =
+        document.getElementById(
+            blockId
+        );
 
     if (!block) {
         return;
     }
 
+    const previous =
+        block.previousElementSibling;
+
     block.remove();
 
+    if (
+        previous &&
+        previous.classList.contains(
+            "add-block"
+        )
+    ) {
+        previous.remove();
+    }
+
     updateBlocksSummary();
+
+    const totalPages =
+        getTotalPages();
+
+    if (
+        currentPage >
+        totalPages
+    ) {
+        currentPage =
+            totalPages;
+    }
+
+    renderCurrentPage();
     searchBlocks();
 }
 
@@ -2426,72 +3034,88 @@ function toggleBlocksSummary(event) {
     event.stopPropagation();
 
     const dropdown =
-        document.getElementById("blocksDropdown");
+        document.getElementById(
+            "blocksDropdown"
+        );
 
-    dropdown.classList.toggle("open");
+    dropdown.classList.toggle(
+        "open"
+    );
 
-    if (dropdown.classList.contains("open")) {
+    if (
+        dropdown.classList.contains(
+            "open"
+        )
+    ) {
         updateBlocksSummary();
     }
 }
 
 function updateBlocksSummary() {
-    const blocks = Array.from(
-        document.querySelectorAll(".block-card")
-    );
+    const blocks = getBlocks();
 
-    const total = blocks.length;
+    const total =
+        blocks.length;
 
-    document.getElementById("blocksCount").textContent =
-        total + (total === 1 ? " bloco" : " blocos");
+    document.getElementById(
+        "blocksCount"
+    ).textContent =
+        total +
+        (
+            total === 1
+                ? " bloco"
+                : " blocos"
+        );
 
     document.getElementById(
         "blocksDropdownSubtitle"
     ).textContent =
         total +
-        (total === 1
-            ? " bloco no total"
-            : " blocos no total");
-
-    const paginationText =
-        document.querySelector(".pagination-text");
-
-    if (paginationText) {
-        paginationText.textContent =
-            total === 0
-                ? "0 blocos nesta página"
-                : "1–" + total + " nesta página";
-    }
+        (
+            total === 1
+                ? " bloco no total"
+                : " blocos no total"
+        );
 
     const groups = {};
 
     blocks.forEach((block) => {
+
         const category =
-            block.dataset.category || "Outros";
+            block.dataset.category ||
+            "Outros";
 
         if (!groups[category]) {
             groups[category] = [];
         }
 
-        groups[category].push(block);
+        groups[category].push(
+            block
+        );
     });
 
     const summary =
-        document.getElementById("blocksSummary");
+        document.getElementById(
+            "blocksSummary"
+        );
 
     summary.innerHTML = "";
 
     Object.entries(groups).forEach(
         ([category, items]) => {
 
-            const categoryWrapper =
-                document.createElement("div");
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
 
-            categoryWrapper.className =
+            wrapper.className =
                 "summary-category";
 
             const categoryButton =
-                document.createElement("button");
+                document.createElement(
+                    "button"
+                );
 
             categoryButton.className =
                 "summary-category-button";
@@ -2502,52 +3126,70 @@ function updateBlocksSummary() {
                 <span class="summary-count">${items.length}</span>
             `;
 
-            categoryButton.onclick = () => {
-                categoryWrapper.classList.toggle(
-                    "expanded"
-                );
-            };
+            categoryButton.onclick =
+                () => {
+                    wrapper.classList.toggle(
+                        "expanded"
+                    );
+                };
 
             const instances =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
             instances.className =
                 "summary-instances";
 
-            items.forEach((block, index) => {
+            items.forEach(
+                (block, index) => {
 
-                const button =
-                    document.createElement("button");
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
 
-                button.className =
-                    "summary-instance";
+                    button.className =
+                        "summary-instance";
 
-                button.innerHTML = `
-                    <span class="summary-instance-number">${index + 1}</span>
-                    <span>${category} ${index + 1}</span>
-                `;
+                    button.innerHTML = `
+                        <span class="summary-instance-number">${index + 1}</span>
+                        <span>${category} ${index + 1}</span>
+                    `;
 
-                button.onclick = () => {
-                    navigateToBlock(block);
+                    button.onclick =
+                        () => {
 
-                    document
-                        .getElementById("blocksDropdown")
-                        .classList.remove("open");
-                };
+                            navigateToBlock(
+                                block
+                            );
 
-                instances.appendChild(button);
-            });
+                            document
+                                .getElementById(
+                                    "blocksDropdown"
+                                )
+                                .classList
+                                .remove(
+                                    "open"
+                                );
+                        };
 
-            categoryWrapper.appendChild(
+                    instances.appendChild(
+                        button
+                    );
+                }
+            );
+
+            wrapper.appendChild(
                 categoryButton
             );
 
-            categoryWrapper.appendChild(
+            wrapper.appendChild(
                 instances
             );
 
             summary.appendChild(
-                categoryWrapper
+                wrapper
             );
         }
     );
@@ -2557,15 +3199,22 @@ function normalizeText(value) {
     return value
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        );
 }
 
 function searchBlocks() {
     const input =
-        document.getElementById("blockSearch");
+        document.getElementById(
+            "blockSearch"
+        );
 
     const value =
-        normalizeText(input.value.trim());
+        normalizeText(
+            input.value.trim()
+        );
 
     clearSearchHighlights();
 
@@ -2576,27 +3225,41 @@ function searchBlocks() {
         return;
     }
 
-    const blocks = Array.from(
-        document.querySelectorAll(".block-card")
-    );
+    const blocks =
+        getBlocks();
 
-    searchResults = blocks.filter((block) => {
+    searchResults =
+        blocks.filter(
+            (block) => {
 
-        const category = normalizeText(
-            block.dataset.category || ""
+                const category =
+                    normalizeText(
+                        block.dataset
+                            .category ||
+                        ""
+                    );
+
+                const title =
+                    normalizeText(
+                        block.dataset
+                            .title ||
+                        ""
+                    );
+
+                return (
+                    category.includes(
+                        value
+                    ) ||
+                    title.includes(
+                        value
+                    )
+                );
+            }
         );
 
-        const title = normalizeText(
-            block.dataset.title || ""
-        );
-
-        return (
-            category.includes(value) ||
-            title.includes(value)
-        );
-    });
-
-    if (searchResults.length > 0) {
+    if (
+        searchResults.length > 0
+    ) {
         currentSearchIndex = 0;
         goToCurrentSearchResult();
     } else {
@@ -2608,20 +3271,27 @@ function searchBlocks() {
 }
 
 function nextSearchResult() {
-    if (searchResults.length === 0) {
+    if (
+        searchResults.length === 0
+    ) {
         searchBlocks();
         return;
     }
 
     currentSearchIndex =
-        (currentSearchIndex + 1) %
+        (
+            currentSearchIndex +
+            1
+        ) %
         searchResults.length;
 
     goToCurrentSearchResult();
 }
 
 function previousSearchResult() {
-    if (searchResults.length === 0) {
+    if (
+        searchResults.length === 0
+    ) {
         searchBlocks();
         return;
     }
@@ -2650,33 +3320,49 @@ function handleSearchKey(event) {
 }
 
 function goToCurrentSearchResult() {
-    clearSearchHighlights();
-
     if (
         currentSearchIndex < 0 ||
-        !searchResults[currentSearchIndex]
+        !searchResults[
+            currentSearchIndex
+        ]
     ) {
         return;
     }
 
-    const block =
-        searchResults[currentSearchIndex];
+    navigateToBlock(
+        searchResults[
+            currentSearchIndex
+        ]
+    );
 
-    navigateToBlock(block);
     updateSearchCounter();
 }
 
 function navigateToBlock(block) {
     clearSearchHighlights();
 
+    const targetPage =
+        getBlockPage(block);
+
+    if (
+        targetPage !== currentPage
+    ) {
+        goToPage(
+            targetPage,
+            false
+        );
+    }
+
     block.classList.add(
         "search-highlight"
     );
 
-    block.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
+    setTimeout(() => {
+        block.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }, 50);
 }
 
 function clearSearchHighlights() {
@@ -2684,11 +3370,13 @@ function clearSearchHighlights() {
         .querySelectorAll(
             ".block-card.search-highlight"
         )
-        .forEach((block) => {
-            block.classList.remove(
-                "search-highlight"
-            );
-        });
+        .forEach(
+            (block) => {
+                block.classList.remove(
+                    "search-highlight"
+                );
+            }
+        );
 }
 
 function updateSearchCounter() {
@@ -2697,25 +3385,32 @@ function updateSearchCounter() {
             "searchCounter"
         );
 
-    const inputValue =
+    const value =
         document
-            .getElementById("blockSearch")
+            .getElementById(
+                "blockSearch"
+            )
             .value
             .trim();
 
-    if (!inputValue) {
+    if (!value) {
         counter.textContent = "";
         return;
     }
 
-    if (searchResults.length === 0) {
-        counter.textContent = "0/0";
+    if (
+        searchResults.length === 0
+    ) {
+        counter.textContent =
+            "0/0";
         return;
     }
 
     counter.textContent =
-        currentSearchIndex +
-        1 +
+        (
+            currentSearchIndex +
+            1
+        ) +
         "/" +
         searchResults.length;
 }
@@ -2726,40 +3421,44 @@ function showEmptySearchMessage() {
             "emptySearchMessage"
         );
 
-    message.classList.add("visible");
+    message.classList.add(
+        "visible"
+    );
 
-    setTimeout(() => {
-        message.classList.remove(
-            "visible"
-        );
-    }, 1500);
+    setTimeout(
+        () => {
+            message.classList.remove(
+                "visible"
+            );
+        },
+        1500
+    );
 }
 
 /* ARQUIVOS */
 
 function openFilesModal() {
-    const backdrop =
-        document.getElementById(
+    document
+        .getElementById(
             "filesModalBackdrop"
+        )
+        .classList.add(
+            "open"
         );
 
-    backdrop.classList.add("open");
     document.body.classList.add(
         "modal-open"
     );
-
-    document
-        .getElementById("blocksDropdown")
-        .classList.remove("open");
 }
 
 function closeFilesModal() {
-    const backdrop =
-        document.getElementById(
+    document
+        .getElementById(
             "filesModalBackdrop"
+        )
+        .classList.remove(
+            "open"
         );
-
-    backdrop.classList.remove("open");
 
     document.body.classList.remove(
         "modal-open"
@@ -2779,105 +3478,139 @@ function handleDragOver(event) {
     event.preventDefault();
 
     document
-        .getElementById("uploadZone")
-        .classList.add("dragging");
+        .getElementById(
+            "uploadZone"
+        )
+        .classList.add(
+            "dragging"
+        );
 }
 
 function handleDragLeave(event) {
     event.preventDefault();
 
     document
-        .getElementById("uploadZone")
-        .classList.remove("dragging");
+        .getElementById(
+            "uploadZone"
+        )
+        .classList.remove(
+            "dragging"
+        );
 }
 
 function handleFileDrop(event) {
     event.preventDefault();
 
     document
-        .getElementById("uploadZone")
-        .classList.remove("dragging");
+        .getElementById(
+            "uploadZone"
+        )
+        .classList.remove(
+            "dragging"
+        );
 
-    const files =
-        Array.from(event.dataTransfer.files);
-
-    addFiles(files);
+    addFiles(
+        Array.from(
+            event.dataTransfer.files
+        )
+    );
 }
 
 function handleFileSelection(event) {
-    const files =
-        Array.from(event.target.files);
-
-    addFiles(files);
+    addFiles(
+        Array.from(
+            event.target.files
+        )
+    );
 
     event.target.value = "";
 }
 
 function addFiles(files) {
-    files.forEach((file) => {
+    files.forEach(
+        (file) => {
 
-        const alreadyAdded =
-            attachedFiles.some(
-                (existingFile) =>
-                    existingFile.name === file.name &&
-                    existingFile.size === file.size
-            );
+            const exists =
+                attachedFiles.some(
+                    (existing) =>
+                        existing.name ===
+                            file.name &&
+                        existing.size ===
+                            file.size
+                );
 
-        if (!alreadyAdded) {
-            attachedFiles.push(file);
+            if (!exists) {
+                attachedFiles.push(
+                    file
+                );
+            }
         }
-    });
+    );
 
     renderFiles();
 }
 
 function removeFile(index) {
-    attachedFiles.splice(index, 1);
+    attachedFiles.splice(
+        index,
+        1
+    );
 
     renderFiles();
 }
 
 function renderFiles() {
     const list =
-        document.getElementById("filesList");
+        document.getElementById(
+            "filesList"
+        );
 
     const empty =
-        document.getElementById("filesEmpty");
+        document.getElementById(
+            "filesEmpty"
+        );
 
     const count =
-        document.getElementById("filesCount");
+        document.getElementById(
+            "filesCount"
+        );
 
     list.innerHTML = "";
 
     count.textContent =
         attachedFiles.length;
 
-    if (attachedFiles.length === 0) {
-        empty.style.display = "block";
+    if (
+        attachedFiles.length === 0
+    ) {
+        empty.style.display =
+            "block";
+
         return;
     }
 
-    empty.style.display = "none";
+    empty.style.display =
+        "none";
 
     attachedFiles.forEach(
         (file, index) => {
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
-            item.className = "file-item";
+            item.className =
+                "file-item";
 
             item.innerHTML = `
                 <div class="file-item-icon">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M7 3H14L19 8V21H7V3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                        <path d="M14 3V8H19" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                    </svg>
+                    📄
                 </div>
 
                 <div class="file-item-info">
                     <div class="file-item-name">
-                        ${escapeHTML(file.name)}
+                        ${file.name}
                     </div>
 
                     <div class="file-item-size">
@@ -2888,15 +3621,14 @@ function renderFiles() {
                 <button
                     class="file-remove"
                     onclick="removeFile(${index})"
-                    title="Remover arquivo"
                 >
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                    </svg>
+                    ✕
                 </button>
             `;
 
-            list.appendChild(item);
+            list.appendChild(
+                item
+            );
         }
     );
 }
@@ -2906,50 +3638,26 @@ function formatFileSize(bytes) {
         return bytes + " B";
     }
 
-    if (bytes < 1024 * 1024) {
+    if (
+        bytes <
+        1024 * 1024
+    ) {
         return (
-            (bytes / 1024).toFixed(1) +
-            " KB"
-        );
+            bytes /
+            1024
+        ).toFixed(1) +
+            " KB";
     }
 
     return (
+        bytes /
         (
-            bytes /
-            (1024 * 1024)
-        ).toFixed(1) +
-        " MB"
-    );
+            1024 *
+            1024
+        )
+    ).toFixed(1) +
+        " MB";
 }
-
-function escapeHTML(value) {
-    return value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-        if (event.key === "Escape") {
-            const modal =
-                document.getElementById(
-                    "filesModalBackdrop"
-                );
-
-            if (
-                modal.classList.contains(
-                    "open"
-                )
-            ) {
-                closeFilesModal();
-            }
-        }
-    }
-);
 
 document.addEventListener(
     "click",
@@ -2962,7 +3670,9 @@ document.addEventListener(
 
         if (
             wrapper &&
-            !wrapper.contains(event.target)
+            !wrapper.contains(
+                event.target
+            )
         ) {
             document
                 .getElementById(
@@ -2976,9 +3686,28 @@ document.addEventListener(
 );
 
 document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+            closeFilesModal();
+        }
+    }
+);
+
+document.addEventListener(
     "DOMContentLoaded",
     function() {
+
+        createDemoBlocks();
+
         updateBlocksSummary();
+
+        renderCurrentPage();
+
         renderFiles();
     }
 );
