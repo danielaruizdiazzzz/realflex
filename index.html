@@ -1698,6 +1698,347 @@ button,
     }
 }
 
+
+/* ===== ITERAÇÃO · BOTÃO SIMULAR NA TOOLBAR FLUTUANTE ===== */
+.simulate-button{
+    height:36px;
+    padding:0 15px;
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    border:1px solid #b9d8f5;
+    background:#eef7ff;
+    color:#0876dd;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.15s ease;
+}
+.simulate-button:hover{
+    background:#e2f1ff;
+    border-color:#8ec7f8;
+}
+.simulate-button svg{
+    width:15px;
+    height:15px;
+}
+
+
+/* ===== V8 · IA POR INSTÂNCIA EM TODOS OS BLOCOS ===== */
+.generic-repeater{
+    margin-top:19px;
+    padding:0;
+    border-top:1px solid #edf0f3;
+}
+.generic-repeater-title{
+    padding:12px 0 8px;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    color:#526175;
+}
+.generic-instance{
+    padding:10px 0;
+    border-top:1px solid #edf0f3;
+}
+.generic-instance-row{
+    display:grid;
+    grid-template-columns:34px 1fr 1fr 1fr 68px;
+    gap:8px;
+    align-items:end;
+}
+.generic-instance .smart-extension{
+    margin:10px 0 0;
+}
+@media (max-width:960px){
+    .generic-instance-row{
+        grid-template-columns:34px repeat(2,minmax(0,1fr)) 68px;
+    }
+}
+@media (max-width:650px){
+    .generic-instance-row{
+        grid-template-columns:34px 1fr 68px;
+    }
+}
+
+
+/* ===== V10 · MODO SIMULAÇÃO ===== */
+
+.logo{
+    cursor:pointer;
+}
+
+.simulation-progress{
+    display:none;
+    min-width:260px;
+    height:36px;
+    padding:0 14px;
+    border-radius:999px;
+    border:1px solid #dbe6f0;
+    background:#f8fbfe;
+    color:#536376;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.simulation-progress.visible{
+    display:flex;
+}
+
+.simulation-spinner{
+    width:14px;
+    height:14px;
+    border:2px solid #cbdced;
+    border-top-color:#0876dd;
+    border-radius:50%;
+    animation:simulationSpin .75s linear infinite;
+    flex-shrink:0;
+}
+
+.simulation-progress.done .simulation-spinner{
+    display:none;
+}
+
+.simulation-progress.done{
+    color:#0876dd;
+    background:#eef7ff;
+    border-color:#b8d8f5;
+}
+
+@keyframes simulationSpin{
+    to{transform:rotate(360deg)}
+}
+
+body.simulation-mode .pagination,
+body.simulation-mode .search-box{
+    display:none!important;
+}
+
+body.simulation-mode .blocks-wrapper{
+    display:none;
+}
+
+body.simulation-mode.simulation-finished .blocks-wrapper{
+    display:block;
+}
+
+body.simulation-mode .add-block,
+body.simulation-mode .delete-block,
+body.simulation-mode .espessura-row-actions,
+body.simulation-mode .operation-button,
+body.simulation-mode .espessura-smart-btn,
+body.simulation-mode .generic-instance .espessura-smart-btn{
+    display:none!important;
+}
+
+body.simulation-mode .save-button{
+    display:none!important;
+}
+
+body.simulation-mode .simulate-button{
+    margin-left:auto;
+}
+
+body.simulation-mode .block-card{
+    display:block!important;
+}
+
+body.simulation-mode .block-card.simulation-current{
+    border-color:#62aef0!important;
+    box-shadow:
+        0 0 0 2px rgba(8,118,221,.12),
+        0 5px 16px rgba(22,34,51,.08)!important;
+}
+
+body.simulation-mode .block-card.simulation-complete{
+    border-color:#cfe1f2;
+}
+
+.simulation-card-result{
+    display:none;
+    margin-top:14px;
+    padding:12px 13px;
+    border:1px solid #d2e5f7;
+    border-radius:11px;
+    background:#f5faff;
+}
+
+.simulation-card-result.visible{
+    display:block;
+}
+
+.simulation-card-result-head{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:10px;
+    color:#0876dd;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+}
+
+.simulation-card-result-head svg{
+    width:14px;
+    height:14px;
+}
+
+.simulation-card-result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.simulation-value{
+    min-width:0;
+}
+
+.simulation-value-label{
+    margin-bottom:5px;
+    color:#6c7b8d;
+    font-size:10px;
+    font-weight:600;
+    text-transform:uppercase;
+}
+
+.simulation-value-number{
+    min-height:36px;
+    padding:0 11px;
+    border:1px solid #cfe0f1;
+    border-radius:9px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    color:#26364a;
+    font-size:12px;
+    font-weight:600;
+}
+
+.simulation-summary{
+    display:none;
+    background:#fff;
+    border:1px solid #dce4eb;
+    border-radius:15px;
+    box-shadow:0 2px 4px rgba(22,34,51,.05);
+    overflow:hidden;
+}
+
+.simulation-summary.visible{
+    display:block;
+}
+
+.simulation-summary-head{
+    min-height:62px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid #e5eaf0;
+    background:#f8fafc;
+}
+
+.simulation-summary-title{
+    color:#243247;
+    font-size:14px;
+    font-weight:700;
+}
+
+.simulation-summary-subtitle{
+    margin-top:3px;
+    color:#8390a0;
+    font-size:11px;
+}
+
+.simulation-summary-status{
+    margin-left:auto;
+    height:28px;
+    padding:0 10px;
+    border-radius:999px;
+    background:#eaf5ff;
+    color:#0876dd;
+    display:flex;
+    align-items:center;
+    font-size:11px;
+    font-weight:700;
+}
+
+.simulation-category-summary{
+    padding:14px 18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    border-bottom:1px solid #edf0f3;
+}
+
+.simulation-category-chip{
+    height:30px;
+    padding:0 10px;
+    border-radius:999px;
+    border:1px solid #d8e5f1;
+    background:#f7fbff;
+    color:#4b5e72;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:11px;
+}
+
+.simulation-category-chip strong{
+    color:#0876dd;
+}
+
+.simulation-results-wrap{
+    overflow:auto;
+}
+
+.simulation-results-table{
+    width:100%;
+    min-width:920px;
+    border-collapse:collapse;
+}
+
+.simulation-results-table th{
+    padding:11px 12px;
+    background:#f2f6fa;
+    border-bottom:1px solid #dbe4ec;
+    color:#4d5e72;
+    text-align:left;
+    font-size:10px;
+    font-weight:700;
+    text-transform:none;
+}
+
+.simulation-results-table td{
+    padding:11px 12px;
+    border-bottom:1px solid #edf0f3;
+    color:#425266;
+    font-size:11px;
+}
+
+.simulation-results-table tr:last-child td{
+    border-bottom:0;
+}
+
+.simulation-results-table .result-final{
+    color:#0876dd;
+    font-weight:700;
+}
+
+@media(max-width:650px){
+    .simulation-progress{
+        min-width:200px;
+    }
+
+    .simulation-card-result-grid{
+        grid-template-columns:1fr;
+    }
+}
+
 </style>
 </head>
 
@@ -1706,7 +2047,7 @@ button,
 <header class="navbar">
 <div class="navbar-inner">
 
-    <div class="logo">
+    <div class="logo" onclick="exitSimulation()" title="Voltar para edição">
         REAL<span>FLEX</span>
     </div>
 
@@ -1744,6 +2085,13 @@ button,
         </div>
 
     </div>
+
+
+    <div class="simulation-progress" id="simulationProgress">
+        <span class="simulation-spinner"></span>
+        <span id="simulationProgressText">Preparando simulação</span>
+    </div>
+
 
     <!-- PAGINAÇÃO NOVA -->
     <div class="pagination">
@@ -1999,6 +2347,37 @@ button,
 
         </div>
 
+    </section>
+
+
+    <section class="simulation-summary" id="simulationSummary">
+        <div class="simulation-summary-head">
+            <div>
+                <div class="simulation-summary-title">Resultado da simulação</div>
+                <div class="simulation-summary-subtitle">
+                    Encadeamento dos cálculos por bloco e por categoria
+                </div>
+            </div>
+            <div class="simulation-summary-status">Simulação concluída</div>
+        </div>
+
+        <div class="simulation-category-summary" id="simulationCategorySummary"></div>
+
+        <div class="simulation-results-wrap">
+            <table class="simulation-results-table">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Bloco</th>
+                        <th>Entrada recebida</th>
+                        <th>Cálculo A</th>
+                        <th>Cálculo B</th>
+                        <th>Resultado enviado</th>
+                    </tr>
+                </thead>
+                <tbody id="simulationResultsBody"></tbody>
+            </table>
+        </div>
     </section>
 
     <button class="add-block">
@@ -2369,41 +2748,26 @@ button,
                 class="block-title-button"
                 onclick="toggleBlock('desengraxamento1')"
             >
-                <span class="block-title">
-                    Desengraxamento
-                </span>
+                <span class="block-title">Desengraxamento</span>
             </button>
 
             <div class="block-actions">
-
-                <div class="smart-code-control">
-                    <span class="smart-label">Código inteligente</span>
-
-                    <button
-                        class="switch"
-                        id="desengraxamento1-switch"
-                        onclick="toggleSmartCode('desengraxamento1')"
-                    ></button>
-                </div>
-
                 <button
                     class="delete-block"
                     onclick="deleteBlock('block-desengraxamento-1')"
+                    title="Excluir bloco"
                 >
-                    🗑
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </button>
-
             </div>
 
         </div>
 
-        <div
-            class="block-content"
-            id="desengraxamento1-content"
-        >
+        <div class="block-content" id="desengraxamento1-content">
 
             <div class="grid-3">
-
                 <div class="field">
                     <div class="field-label">CÓDIGO</div>
                     <div class="field-value"><span class="placeholder">—</span></div>
@@ -2418,177 +2782,186 @@ button,
                     <div class="field-label">TEMPERATURA</div>
                     <div class="field-value"><span class="placeholder">—</span></div>
                 </div>
-
             </div>
 
-            <div
-                class="smart-extension"
-                id="desengraxamento1-smart"
-            >
-                <div class="smart-extension-header">
-                    <div class="smart-extension-icon">✦</div>
-                    <span class="smart-extension-title">
-                        Código inteligente
-                    </span>
-                    <span class="smart-extension-subtitle">
-                        Configuração adicional
-                    </span>
+            
+            <div class="generic-repeater" data-prefix="desengraxamento1">
+                <div class="generic-repeater-title">ITENS</div>
+                
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button
+                            class="espessura-smart-btn"
+                            id="desengraxamento1-item1-smart-button"
+                            onclick="toggleRepeaterSmartCode('desengraxamento1-item1')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">ITEM 1</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="espessura-row-actions">
+                        <button
+                            class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'desengraxamento1')"
+                            title="Adicionar item abaixo"
+                            aria-label="Adicionar item abaixo"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+
+                        <button
+                            class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item"
+                            aria-label="Excluir este item"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="grid-4">
-
-                    <div class="field smart-field">
-                        <div class="field-label">TIPO DE CÓDIGO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
+                <div class="smart-extension" id="desengraxamento1-item1-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
                     </div>
 
-                    <div class="field smart-field">
-                        <div class="field-label">PREFIXO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
                     </div>
-
-                    <div class="field smart-field">
-                        <div class="field-label">SEQUÊNCIA</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field smart-field">
-                        <div class="field-label">FORMATO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
                 </div>
             </div>
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button
+                            class="espessura-smart-btn"
+                            id="desengraxamento1-item2-smart-button"
+                            onclick="toggleRepeaterSmartCode('desengraxamento1-item2')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">ITEM 2</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+
+                    <div class="espessura-row-actions">
+                        <button
+                            class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'desengraxamento1')"
+                            title="Adicionar item abaixo"
+                            aria-label="Adicionar item abaixo"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+
+                        <button
+                            class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item"
+                            aria-label="Excluir este item"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="smart-extension" id="desengraxamento1-item2-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+
+                    <div class="grid-4">
+                        <div class="field smart-field">
+                            <div class="field-label">TIPO DE CÓDIGO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">PREFIXO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">SEQUÊNCIA</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                        <div class="field smart-field">
+                            <div class="field-label">FORMATO</div>
+                            <div class="field-value"><span class="placeholder">—</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
 
         </div>
 
     </section>
-
-    <button class="add-block">
-        <span>＋</span>
-        Adicionar bloco aqui
-    </button>
-
-    <!-- BITOLA 2 -->
-    <section
-        class="card block-card"
-        id="block-bitola-2"
-        data-category="Bitola"
-        data-title="Bitola"
-    >
-
-        <div
-            class="block-header collapsed"
-            id="bitola2-header"
-        >
-
-            <button class="drag-icon">⠿</button>
-
-            <button
-                class="expand-button"
-                onclick="toggleBlock('bitola2')"
-            >
-                <span class="chevron-icon"></span>
-            </button>
-
-            <button
-                class="block-title-button"
-                onclick="toggleBlock('bitola2')"
-            >
-                <span class="block-title">BITOLA</span>
-            </button>
-
-            <div class="block-actions">
-                <div class="smart-code-control">
-                    <span class="smart-label">Código inteligente</span>
-                    <button
-                        class="switch"
-                        id="bitola2-switch"
-                        onclick="toggleSmartCode('bitola2')"
-                    ></button>
-                </div>
-
-                <button
-                    class="delete-block"
-                    onclick="deleteBlock('block-bitola-2')"
-                >
-                    🗑
-                </button>
-            </div>
-
-        </div>
-
-        <div
-            class="block-content hidden"
-            id="bitola2-content"
-        >
-
-            <div class="grid-3">
-
-                <div class="field">
-                    <div class="field-label">NUMERO LONAS (UN)</div>
-                    <div class="field-value">1</div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">NUMERO DE PEÇAS (UN)</div>
-                    <div class="field-value">6</div>
-                </div>
-
-                <div class="field">
-                    <div class="field-label">DIAMETRO INTERNO NOMINAL</div>
-                    <div class="field-value">80,00</div>
-                </div>
-
-            </div>
-
-            <div
-                class="smart-extension"
-                id="bitola2-smart"
-            >
-                <div class="smart-extension-header">
-                    <div class="smart-extension-icon">✦</div>
-                    <span class="smart-extension-title">
-                        Código inteligente
-                    </span>
-                    <span class="smart-extension-subtitle">
-                        Configuração adicional
-                    </span>
-                </div>
-
-                <div class="grid-4">
-
-                    <div class="field smart-field">
-                        <div class="field-label">TIPO DE CÓDIGO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field smart-field">
-                        <div class="field-label">PREFIXO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field smart-field">
-                        <div class="field-label">SEQUÊNCIA</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                    <div class="field smart-field">
-                        <div class="field-label">FORMATO</div>
-                        <div class="field-value"><span class="placeholder">—</span></div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <button class="add-block">
-        <span>＋</span>
-        Adicionar bloco aqui
-    </button>
 
     <!-- ACESSORIOS -->
     <section
@@ -2622,19 +2995,7 @@ button,
             </button>
 
             <div class="block-actions">
-                <div class="smart-code-control">
-                    <span class="smart-label">
-                        Código inteligente
-                    </span>
-
-                    <button
-                        class="switch"
-                        id="acessorios1-switch"
-                        onclick="toggleSmartCode('acessorios1')"
-                    ></button>
-                </div>
-
-                <button
+<button
                     class="delete-block"
                     onclick="deleteBlock('block-acessorios-1')"
                 >
@@ -2668,7 +3029,126 @@ button,
 
             </div>
 
+        
+        <div class="generic-repeater" data-prefix="acessorios1">
+            <div class="generic-repeater-title">ITENS</div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="acessorios1-item1-smart-button"
+                            onclick="toggleRepeaterSmartCode('acessorios1-item1')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 1</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'acessorios1')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="acessorios1-item1-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="acessorios1-item2-smart-button"
+                            onclick="toggleRepeaterSmartCode('acessorios1-item2')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 2</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'acessorios1')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="acessorios1-item2-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+</div>
 
     </section>
 
@@ -2709,19 +3189,7 @@ button,
             </button>
 
             <div class="block-actions">
-                <div class="smart-code-control">
-                    <span class="smart-label">
-                        Código inteligente
-                    </span>
-
-                    <button
-                        class="switch"
-                        id="desengraxamento2-switch"
-                        onclick="toggleSmartCode('desengraxamento2')"
-                    ></button>
-                </div>
-
-                <button
+<button
                     class="delete-block"
                     onclick="deleteBlock('block-desengraxamento-2')"
                 >
@@ -2755,7 +3223,126 @@ button,
 
             </div>
 
+        
+        <div class="generic-repeater" data-prefix="desengraxamento2">
+            <div class="generic-repeater-title">ITENS</div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="desengraxamento2-item1-smart-button"
+                            onclick="toggleRepeaterSmartCode('desengraxamento2-item1')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 1</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'desengraxamento2')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="desengraxamento2-item1-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="desengraxamento2-item2-smart-button"
+                            onclick="toggleRepeaterSmartCode('desengraxamento2-item2')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 2</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'desengraxamento2')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="desengraxamento2-item2-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+</div>
 
     </section>
 
@@ -2796,19 +3383,7 @@ button,
             </button>
 
             <div class="block-actions">
-                <div class="smart-code-control">
-                    <span class="smart-label">
-                        Código inteligente
-                    </span>
-
-                    <button
-                        class="switch"
-                        id="embalagem1-switch"
-                        onclick="toggleSmartCode('embalagem1')"
-                    ></button>
-                </div>
-
-                <button
+<button
                     class="delete-block"
                     onclick="deleteBlock('block-embalagem-1')"
                 >
@@ -2842,7 +3417,126 @@ button,
 
             </div>
 
+        
+        <div class="generic-repeater" data-prefix="embalagem1">
+            <div class="generic-repeater-title">ITENS</div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="embalagem1-item1-smart-button"
+                            onclick="toggleRepeaterSmartCode('embalagem1-item1')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 1</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'embalagem1')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="embalagem1-item1-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="generic-instance">
+                <div class="generic-instance-row">
+                    <div class="espessura-smart-wrap">
+                        <button class="espessura-smart-btn" id="embalagem1-item2-smart-button"
+                            onclick="toggleRepeaterSmartCode('embalagem1-item2')"
+                            aria-label="Adicionar código inteligente a esta instância"
+                            aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">ITEM 2</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">VALOR</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">OBSERVAÇÃO</div>
+                        <div class="field-value"><span class="placeholder">—</span></div>
+                    </div>
+                    <div class="espessura-row-actions">
+                        <button class="espessura-row-action add"
+                            onclick="addGenericInstanceAfter(this, 'embalagem1')"
+                            title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="espessura-row-action delete"
+                            onclick="deleteGenericInstance(this)"
+                            title="Excluir este item" aria-label="Excluir este item">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="smart-extension" id="embalagem1-item2-smart">
+                    <div class="smart-extension-header">
+                        <div class="smart-extension-icon">✦</div>
+                        <span class="smart-extension-title">Código inteligente</span>
+                        <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                    </div>
+                    <div class="grid-4">
+                        <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                        <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+</div>
 
     </section>
 
@@ -2855,8 +3549,12 @@ button,
 </main>
 
 <div class="save-bar">
-    <button class="cancel-button">
-        ⊘ Cancelar
+    
+    <button class="simulate-button" onclick="startSimulation()">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        Simular
     </button>
 
     <button class="save-button">
@@ -2984,7 +3682,6 @@ function createDemoBlocks() {
     }
 
     const categories = [
-        "Bitola",
         "Desengraxamento",
         "Acessórios",
         "Embalagem",
@@ -3069,22 +3766,7 @@ function createDemoBlocks() {
                 </button>
 
                 <div class="block-actions">
-
-                    <div class="smart-code-control">
-
-                        <span class="smart-label">
-                            Código inteligente
-                        </span>
-
-                        <button
-                            class="switch"
-                            id="${slug}-switch"
-                            onclick="toggleSmartCode('${slug}')"
-                        ></button>
-
-                    </div>
-
-                    <button
+<button
                         class="delete-block"
                         onclick="deleteBlock('block-${slug}')"
                         title="Excluir bloco"
@@ -3158,79 +3840,97 @@ function createDemoBlocks() {
 
                 </div>
 
-                <div
-                    class="smart-extension"
-                    id="${slug}-smart"
-                >
 
-                    <div class="smart-extension-header">
+                <div class="generic-repeater" data-prefix="${slug}">
+                    <div class="generic-repeater-title">ITENS</div>
 
-                        <div class="smart-extension-icon">
-                            ✦
+                    <div class="generic-instance">
+                        <div class="generic-instance-row">
+
+                            <div class="espessura-smart-wrap">
+                                <button
+                                    class="espessura-smart-btn"
+                                    id="${slug}-item1-smart-button"
+                                    onclick="toggleRepeaterSmartCode('${slug}-item1')"
+                                    aria-label="Adicionar código inteligente a esta instância"
+                                    aria-pressed="false"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                                        <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">ITEM 1</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">VALOR</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-label">OBSERVAÇÃO</div>
+                                <div class="field-value"><span class="placeholder">—</span></div>
+                            </div>
+
+                            <div class="espessura-row-actions">
+                                <button
+                                    class="espessura-row-action add"
+                                    onclick="addGenericInstanceAfter(this, '${slug}')"
+                                    title="Adicionar item abaixo"
+                                    aria-label="Adicionar item abaixo"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+
+                                <button
+                                    class="espessura-row-action delete"
+                                    onclick="deleteGenericInstance(this)"
+                                    title="Excluir este item"
+                                    aria-label="Excluir este item"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+
                         </div>
 
-                        <span class="smart-extension-title">
-                            Código inteligente
-                        </span>
+                        <div class="smart-extension" id="${slug}-item1-smart">
+                            <div class="smart-extension-header">
+                                <div class="smart-extension-icon">✦</div>
+                                <span class="smart-extension-title">Código inteligente</span>
+                                <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+                            </div>
 
-                        <span class="smart-extension-subtitle">
-                            Configuração adicional
-                        </span>
+                            <div class="grid-4">
+                                <div class="field smart-field">
+                                    <div class="field-label">TIPO DE CÓDIGO</div>
+                                    <div class="field-value"><span class="placeholder">—</span></div>
+                                </div>
+                                <div class="field smart-field">
+                                    <div class="field-label">PREFIXO</div>
+                                    <div class="field-value"><span class="placeholder">—</span></div>
+                                </div>
+                                <div class="field smart-field">
+                                    <div class="field-label">SEQUÊNCIA</div>
+                                    <div class="field-value"><span class="placeholder">—</span></div>
+                                </div>
+                                <div class="field smart-field">
+                                    <div class="field-label">FORMATO</div>
+                                    <div class="field-value"><span class="placeholder">—</span></div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
-
-                    <div class="grid-4">
-
-                        <div class="field smart-field">
-                            <div class="field-label">
-                                TIPO DE CÓDIGO
-                            </div>
-
-                            <div class="field-value">
-                                <span class="placeholder">
-                                    —
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">
-                                PREFIXO
-                            </div>
-
-                            <div class="field-value">
-                                <span class="placeholder">
-                                    —
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">
-                                SEQUÊNCIA
-                            </div>
-
-                            <div class="field-value">
-                                <span class="placeholder">
-                                    —
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="field smart-field">
-                            <div class="field-label">
-                                FORMATO
-                            </div>
-
-                            <div class="field-value">
-                                <span class="placeholder">
-                                    —
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
 
             </div>
@@ -3694,6 +4394,709 @@ function deleteEspessura(button) {
 }
 
 
+
+function showSimulationToast() {
+    const existing = document.getElementById("simulationToast");
+
+    if (existing) {
+        existing.classList.add("visible");
+
+        setTimeout(() => {
+            existing.classList.remove("visible");
+        }, 1600);
+
+        return;
+    }
+
+    const toast = document.createElement("div");
+    toast.id = "simulationToast";
+    toast.className = "empty-search visible";
+    toast.textContent = "Simulação iniciada";
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.remove("visible");
+    }, 1600);
+}
+
+
+const genericInstanceCounters = {};
+
+function addGenericInstanceAfter(button, prefix) {
+    const currentInstance = button.closest(".generic-instance");
+    const repeater = currentInstance ? currentInstance.closest(".generic-repeater") : null;
+    if (!currentInstance || !repeater) return;
+
+    if (!genericInstanceCounters[prefix]) {
+        genericInstanceCounters[prefix] = repeater.querySelectorAll(".generic-instance").length;
+    }
+    genericInstanceCounters[prefix] += 1;
+
+    const number = genericInstanceCounters[prefix];
+    const instanceName = prefix + "-item" + number;
+    const instance = document.createElement("div");
+    instance.className = "generic-instance";
+
+    instance.innerHTML = `
+        <div class="generic-instance-row">
+            <div class="espessura-smart-wrap">
+                <button class="espessura-smart-btn" id="${instanceName}-smart-button"
+                    onclick="toggleRepeaterSmartCode('${instanceName}')"
+                    aria-label="Adicionar código inteligente a esta instância"
+                    aria-pressed="false">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3L13.7 8.3L19 10L13.7 11.7L12 17L10.3 11.7L5 10L10.3 8.3L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                        <path d="M18.5 16L19.3 18.2L21.5 19L19.3 19.8L18.5 22L17.7 19.8L15.5 19L17.7 18.2L18.5 16Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="field"><div class="field-label">ITEM ${number}</div><div class="field-value"><span class="placeholder">—</span></div></div>
+            <div class="field"><div class="field-label">VALOR</div><div class="field-value"><span class="placeholder">—</span></div></div>
+            <div class="field"><div class="field-label">OBSERVAÇÃO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+            <div class="espessura-row-actions">
+                <button class="espessura-row-action add" onclick="addGenericInstanceAfter(this, '${prefix}')" title="Adicionar item abaixo" aria-label="Adicionar item abaixo">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+                <button class="espessura-row-action delete" onclick="deleteGenericInstance(this)" title="Excluir este item" aria-label="Excluir este item">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 7H20M7 7L8 21H16L17 7M10 11V17M14 11V17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="smart-extension" id="${instanceName}-smart">
+            <div class="smart-extension-header">
+                <div class="smart-extension-icon">✦</div>
+                <span class="smart-extension-title">Código inteligente</span>
+                <span class="smart-extension-subtitle">Aplicado somente a esta instância</span>
+            </div>
+            <div class="grid-4">
+                <div class="field smart-field"><div class="field-label">TIPO DE CÓDIGO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                <div class="field smart-field"><div class="field-label">PREFIXO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                <div class="field smart-field"><div class="field-label">SEQUÊNCIA</div><div class="field-value"><span class="placeholder">—</span></div></div>
+                <div class="field smart-field"><div class="field-label">FORMATO</div><div class="field-value"><span class="placeholder">—</span></div></div>
+            </div>
+        </div>`;
+    currentInstance.insertAdjacentElement("afterend", instance);
+}
+
+function deleteGenericInstance(button) {
+    const instance = button.closest(".generic-instance");
+    if (!instance) return;
+    const repeater = instance.closest(".generic-repeater");
+    const instances = repeater ? repeater.querySelectorAll(".generic-instance") : [];
+    if (instances.length <= 1) return;
+    instance.remove();
+}
+
+
+let simulationTimer = null;
+let simulationIndex = 0;
+let simulationRows = [];
+let simulationAccumulator = 100;
+
+function getSimulationBlocks() {
+    return Array.from(
+        document.querySelectorAll(
+            "#blocksContainer .block-card"
+        )
+    );
+}
+
+function ensureSimulationResultBox(block) {
+    let result =
+        block.querySelector(
+            ".simulation-card-result"
+        );
+
+    if (result) {
+        return result;
+    }
+
+    const content =
+        block.querySelector(
+            ".block-content"
+        );
+
+    if (!content) {
+        return null;
+    }
+
+    result =
+        document.createElement(
+            "div"
+        );
+
+    result.className =
+        "simulation-card-result";
+
+    result.innerHTML = `
+        <div class="simulation-card-result-head">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12H19M14 7L19 12L14 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Cálculo da simulação
+        </div>
+
+        <div class="simulation-card-result-grid">
+            <div class="simulation-value">
+                <div class="simulation-value-label">Cálculo A</div>
+                <div class="simulation-value-number" data-simulation-a>—</div>
+            </div>
+
+            <div class="simulation-value">
+                <div class="simulation-value-label">Cálculo B</div>
+                <div class="simulation-value-number" data-simulation-b>—</div>
+            </div>
+
+            <div class="simulation-value">
+                <div class="simulation-value-label">Resultado acumulado</div>
+                <div class="simulation-value-number" data-simulation-result>—</div>
+            </div>
+        </div>
+    `;
+
+    content.appendChild(
+        result
+    );
+
+    return result;
+}
+
+function openSimulationBlock(block) {
+    const content =
+        block.querySelector(
+            ".block-content"
+        );
+
+    const header =
+        block.querySelector(
+            ".block-header"
+        );
+
+    if (content) {
+        content.classList.remove(
+            "hidden"
+        );
+    }
+
+    if (header) {
+        header.classList.remove(
+            "collapsed"
+        );
+    }
+}
+
+function calculateSimulationBlock(block, index) {
+    const category =
+        block.dataset.category ||
+        block.dataset.title ||
+        "Bloco";
+
+    const title =
+        block.dataset.title ||
+        category;
+
+    const input =
+        simulationAccumulator;
+
+    const factorA =
+        1.02 +
+        (
+            (
+                index % 5
+            ) * 0.01
+        );
+
+    const calcA =
+        input * factorA;
+
+    const calcB =
+        calcA +
+        (
+            3 +
+            (
+                index % 7
+            )
+        );
+
+    const output =
+        Math.round(
+            calcB * 100
+        ) / 100;
+
+    simulationAccumulator =
+        output;
+
+    return {
+        category,
+        title,
+        input:
+            Math.round(
+                input * 100
+            ) / 100,
+        calcA:
+            Math.round(
+                calcA * 100
+            ) / 100,
+        calcB:
+            Math.round(
+                calcB * 100
+            ) / 100,
+        output
+    };
+}
+
+function updateSimulationCardResult(
+    block,
+    row
+) {
+    const result =
+        ensureSimulationResultBox(
+            block
+        );
+
+    if (!result) {
+        return;
+    }
+
+    result.querySelector(
+        "[data-simulation-a]"
+    ).textContent =
+        row.calcA.toFixed(2);
+
+    result.querySelector(
+        "[data-simulation-b]"
+    ).textContent =
+        row.calcB.toFixed(2);
+
+    result.querySelector(
+        "[data-simulation-result]"
+    ).textContent =
+        row.output.toFixed(2);
+
+    result.classList.add(
+        "visible"
+    );
+}
+
+function clearSimulationVisuals() {
+    document
+        .querySelectorAll(
+            ".block-card"
+        )
+        .forEach(
+            (block) => {
+                block.classList.remove(
+                    "simulation-current",
+                    "simulation-complete"
+                );
+
+                const result =
+                    block.querySelector(
+                        ".simulation-card-result"
+                    );
+
+                if (result) {
+                    result.classList.remove(
+                        "visible"
+                    );
+                }
+            }
+        );
+
+    const summary =
+        document.getElementById(
+            "simulationSummary"
+        );
+
+    if (summary) {
+        summary.classList.remove(
+            "visible"
+        );
+    }
+}
+
+function startSimulation() {
+    if (simulationTimer) {
+        clearTimeout(
+            simulationTimer
+        );
+
+        simulationTimer =
+            null;
+    }
+
+    document.body.classList.add(
+        "simulation-mode"
+    );
+
+    document.body.classList.remove(
+        "simulation-finished"
+    );
+
+    clearSimulationVisuals();
+
+    simulationRows = [];
+    simulationIndex = 0;
+    simulationAccumulator = 100;
+
+    const blocks =
+        getSimulationBlocks();
+
+    const progress =
+        document.getElementById(
+            "simulationProgress"
+        );
+
+    const progressText =
+        document.getElementById(
+            "simulationProgressText"
+        );
+
+    const simulateButton =
+        document.querySelector(
+            ".simulate-button"
+        );
+
+    if (progress) {
+        progress.classList.add(
+            "visible"
+        );
+
+        progress.classList.remove(
+            "done"
+        );
+    }
+
+    if (simulateButton) {
+        simulateButton.disabled =
+            true;
+
+        simulateButton.style.opacity =
+            ".6";
+
+        simulateButton.innerHTML = `
+            <span class="simulation-spinner"></span>
+            Simulando
+        `;
+    }
+
+    blocks.forEach(
+        (block) => {
+            block.style.display =
+                "block";
+
+            openSimulationBlock(
+                block
+            );
+        }
+    );
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+    function runNext() {
+        blocks.forEach(
+            (block) => {
+                block.classList.remove(
+                    "simulation-current"
+                );
+            }
+        );
+
+        if (
+            simulationIndex >=
+            blocks.length
+        ) {
+            finishSimulation(
+                blocks
+            );
+
+            return;
+        }
+
+        const block =
+            blocks[
+                simulationIndex
+            ];
+
+        block.classList.add(
+            "simulation-current"
+        );
+
+        openSimulationBlock(
+            block
+        );
+
+        const row =
+            calculateSimulationBlock(
+                block,
+                simulationIndex
+            );
+
+        simulationRows.push(
+            row
+        );
+
+        updateSimulationCardResult(
+            block,
+            row
+        );
+
+        if (progressText) {
+            progressText.textContent =
+                `Calculando bloco ${
+                    simulationIndex + 1
+                }/${blocks.length}`;
+        }
+
+        block.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        simulationTimer =
+            setTimeout(
+                () => {
+                    block.classList.remove(
+                        "simulation-current"
+                    );
+
+                    block.classList.add(
+                        "simulation-complete"
+                    );
+
+                    simulationIndex += 1;
+
+                    runNext();
+                },
+                240
+            );
+    }
+
+    runNext();
+}
+
+function finishSimulation(blocks) {
+    simulationTimer =
+        null;
+
+    document.body.classList.add(
+        "simulation-finished"
+    );
+
+    const progress =
+        document.getElementById(
+            "simulationProgress"
+        );
+
+    const progressText =
+        document.getElementById(
+            "simulationProgressText"
+        );
+
+    if (progress) {
+        progress.classList.add(
+            "done"
+        );
+    }
+
+    if (progressText) {
+        progressText.textContent =
+            `Simulação concluída · ${
+                blocks.length
+            }/${blocks.length}`;
+    }
+
+    updateBlocksSummary();
+
+    renderSimulationSummary();
+
+    const summary =
+        document.getElementById(
+            "simulationSummary"
+        );
+
+    if (summary) {
+        summary.classList.add(
+            "visible"
+        );
+
+        setTimeout(
+            () => {
+                summary.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            },
+            250
+        );
+    }
+
+    const simulateButton =
+        document.querySelector(
+            ".simulate-button"
+        );
+
+    if (simulateButton) {
+        simulateButton.disabled =
+            false;
+
+        simulateButton.style.opacity =
+            "1";
+
+        simulateButton.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            Simular novamente
+        `;
+    }
+}
+
+function renderSimulationSummary() {
+    const tbody =
+        document.getElementById(
+            "simulationResultsBody"
+        );
+
+    const categorySummary =
+        document.getElementById(
+            "simulationCategorySummary"
+        );
+
+    if (
+        !tbody ||
+        !categorySummary
+    ) {
+        return;
+    }
+
+    tbody.innerHTML = "";
+    categorySummary.innerHTML = "";
+
+    const counts = {};
+
+    simulationRows.forEach(
+        (row, index) => {
+            counts[row.category] =
+                (
+                    counts[
+                        row.category
+                    ] || 0
+                ) + 1;
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+            tr.innerHTML = `
+                <td>${row.category}</td>
+                <td>${row.title} ${index + 1}</td>
+                <td>${row.input.toFixed(2)}</td>
+                <td>${row.calcA.toFixed(2)}</td>
+                <td>${row.calcB.toFixed(2)}</td>
+                <td class="result-final">${row.output.toFixed(2)}</td>
+            `;
+
+            tbody.appendChild(
+                tr
+            );
+        }
+    );
+
+    Object
+        .entries(
+            counts
+        )
+        .forEach(
+            ([category, count]) => {
+                const chip =
+                    document.createElement(
+                        "div"
+                    );
+
+                chip.className =
+                    "simulation-category-chip";
+
+                chip.innerHTML =
+                    `${category} <strong>${count}</strong>`;
+
+                categorySummary.appendChild(
+                    chip
+                );
+            }
+        );
+}
+
+function exitSimulation() {
+    if (
+        !document.body.classList.contains(
+            "simulation-mode"
+        )
+    ) {
+        return;
+    }
+
+    if (simulationTimer) {
+        clearTimeout(
+            simulationTimer
+        );
+
+        simulationTimer =
+            null;
+    }
+
+    document.body.classList.remove(
+        "simulation-mode",
+        "simulation-finished"
+    );
+
+    const progress =
+        document.getElementById(
+            "simulationProgress"
+        );
+
+    if (progress) {
+        progress.classList.remove(
+            "visible",
+            "done"
+        );
+    }
+
+    const simulateButton =
+        document.querySelector(
+            ".simulate-button"
+        );
+
+    if (simulateButton) {
+        simulateButton.disabled =
+            false;
+
+        simulateButton.style.opacity =
+            "1";
+
+        simulateButton.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8 5V19L19 12L8 5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            Simular
+        `;
+    }
+
+    clearSimulationVisuals();
+
+    renderCurrentPage();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
 function deleteBlock(blockId) {
     const block =
         document.getElementById(
@@ -4058,6 +5461,33 @@ function navigateToBlock(block) {
         );
     }
 
+    const content =
+        block.querySelector(
+            ".block-content"
+        );
+
+    const header =
+        block.querySelector(
+            ".block-header"
+        );
+
+    if (
+        content &&
+        content.classList.contains(
+            "hidden"
+        )
+    ) {
+        content.classList.remove(
+            "hidden"
+        );
+
+        if (header) {
+            header.classList.remove(
+                "collapsed"
+            );
+        }
+    }
+
     block.classList.add(
         "search-highlight"
     );
@@ -4067,7 +5497,7 @@ function navigateToBlock(block) {
             behavior: "smooth",
             block: "center"
         });
-    }, 50);
+    }, 80);
 }
 
 function clearSearchHighlights() {
